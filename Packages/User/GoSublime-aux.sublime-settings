@@ -1,0 +1,133 @@
+{
+	"9o.hist./home/vimi/aaaaaVimiDateFile/vimisublime/src":
+	[
+		"go run main.go"
+	],
+	"9o.hist./home/vimi/aaaaaVimiSoftware/git_for_flie":
+	[
+		"go build main.go",
+		"go run main.go"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/function/vimi/file":
+	[
+		"go run file_writer_test.go"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/database-work/server":
+	[
+		"go build -o build/server main.go",
+		"go build -o database-work/build/server main.go",
+		"go build -o server main.go",
+		"go build -o main main.go"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/daycam-server":
+	[
+		"go build main.go"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/daycam-server/client":
+	[
+		"go build main.go",
+		"go run main.go"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/daycam-server/services/push":
+	[
+		"go build"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/go-web/db":
+	[
+		"go build",
+		"go install"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/go-web/db/model":
+	[
+		"go install"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/go-web/db/models":
+	[
+		"go install"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/go-web/logs":
+	[
+		"go install",
+		"go test logs",
+		"go test"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/go-web/main-server":
+	[
+		"go build",
+		"go run client.go"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/go-web/push":
+	[
+		"go build"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/go-web/push/telegram":
+	[
+		"go build"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/go-web/server":
+	[
+		"go build",
+		"go build main.go"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/go-web/services":
+	[
+		"go install",
+		"go build"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/sundayfun/vimi-demo/src/story":
+	[
+		"go build",
+		"go install"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/test":
+	[
+		"go run main.go -word fooo",
+		"GoSublime r18.05.19-1 9o: type `help` for help and command documentation\n\n[ `go run main.go` | done: 3.770165703s ]\n\t2\n[ /usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/test/ ] # \n[ `go run main.go` | done: 3.450472326s ]\n\t{0 0}\n[ /usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/test/ ] # \n[ `go run main.go` | done: 150.516155ms ]\n\t# command-line-arguments\n\t./main.go:10:15: syntax error: unexpected {, expecting semicolon or newline or }\n\t./main.go:11:1: syntax error: non-declaration statement outside function body\n\t\n\texit status 2\n[ /usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/test/ ] # \n[ `go run main.go` | done: 1.544347162s ]\n\t{1 0}\n[ /usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/test/ ] # \n[ `go run main.go -word fooo` | done: 4.424862305s ]\n\tword: fooo\n\tnumb: 42\n\tfork: false\n\tsvar: bar\n\ttail: []\n[ /usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/test/ ] #",
+		"go run main.go --word fooooo",
+		"go run main.go --word -numb 2",
+		"go run main.go --word ? -numb 2",
+		"go run main.go --word ? -numb 2 --fork true --svar f",
+		"go run main.go --word ? -numb 2 --fork  --svar f",
+		"go run main.go --word ? -numb 2 --svar f",
+		"go run main.go",
+		"go build main.go"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/test/filter":
+	[
+		"go build"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/test/src":
+	[
+		"go run main.go -word=222 -numb=3",
+		"go run main.go -word 222",
+		"go run main.go -word 222 --numb 555 --fork true",
+		"go run main.go -word 222 --numb 555 --fork true -svar=test ????",
+		"go run main.go -word 222 --numb 555 --fork true -svar test",
+		"go run main.go -word=222 --numb=555 --fork=true -svar=test",
+		"go run main.go -word=222 --numb=555 --fork=true -svar=test fsldkfjklsdjfklsjkl",
+		"go run main.go -word=222 --numb=555 --fork=true -skvar=test fsldkfjklsdjfklsjkl",
+		"clear",
+		"go run main.go",
+		"go build main.go"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/vimi-demo/models":
+	[
+		"go install"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/vimi-demo/src/story":
+	[
+		"go install"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/vimi-demo/src/story_client":
+	[
+		"go run main.go",
+		"go build main.go"
+	],
+	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/vimi-demo/src/story_server":
+	[
+		"go build main.go"
+	],
+	"ann": "a18.05.19-1",
+	"install_version": "r18.05.19-1",
+	"version": "r18.05.19-1"
+}

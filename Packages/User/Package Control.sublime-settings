@@ -1,0 +1,35 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"A File Icon",
+		"Boxy Theme",
+		"C++11",
+		"CodeFormatter",
+		"Colorsublime",
+		"DocBlockr",
+		"Dockerfile Syntax Highlighting",
+		"Emmet",
+		"Godef",
+		"GoSublime",
+		"MarkdownPreview",
+		"Package Control",
+		"Predawn",
+		"Protobuf Syntax Hightlighting",
+		"Seti_UI",
+		"SideBarEnhancements",
+		"Status Bar Time",
+		"SublimeAStyleFormatter",
+		"SublimeCodeIntel",
+		"SublimeLinter-cpplint",
+		"SublimeLinter-golint",
+		"SublimeLinter-pylint",
+		"SyncedSideBar",
+		"Terminal",
+		"Theme - Afterglow",
+		"Themr"
+	]
+}

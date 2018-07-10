@@ -1,0 +1,37 @@
+{
+	"jdk_version":
+	{
+		"use": ""
+	},
+	"message_id": 20,
+	"project_data":
+	{
+		"2":
+		{
+			"folders":
+			[
+				{
+					"path": "/usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/test"
+				},
+				{
+					"path": "/usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/rpc"
+				},
+				{
+					"path": "/usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/daycam-server"
+				},
+				{
+					"path": "/usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/go-web"
+				},
+				{
+					"path": "/home/vimi/aaaaaVimiDateFile/javaProject/cn.edu.scau.cmi.liuweiming"
+				},
+				{
+					"path": "/home/vimi/aaaaaVimiDateFile/python-project"
+				},
+				{
+					"path": "/usr/lib/go-1.9/GOPATH/src/github.com/sundayfun/cpp"
+				}
+			]
+		}
+	}
+}

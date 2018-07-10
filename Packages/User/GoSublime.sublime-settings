@@ -1,0 +1,8 @@
+{
+    "env": {
+         "GOROOT" : "/usr/lib/go-1.10",
+         "GOBIN" : "/usr/lib/go-1.9/GOPATH/bin",
+         "GOPATH" : "/usr/lib/go-1.9/GOPATH",
+    },
+    "fmt_cmd": ["/usr/lib/go-1.9/GOPATH/bin/goimports"],
+}
