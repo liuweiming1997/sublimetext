@@ -8,6 +8,14 @@
 		"go build main.go",
 		"go run main.go"
 	],
+	"9o.hist./home/vimi/aaaavimidatafile/go-web/redis":
+	[
+		"go test"
+	],
+	"9o.hist./home/vimi/go/src/github.com/sundayfun/go-web/redis":
+	[
+		"go test"
+	],
 	"9o.hist./usr/lib/go-1.9/GOPATH/src/github.com/function/vimi/file":
 	[
 		"go run file_writer_test.go"

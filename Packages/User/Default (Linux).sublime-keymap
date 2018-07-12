@@ -12,6 +12,9 @@
         ]
     },
 
+    // The go program languange
+    // { "keys": ["ctrl+d"], "command": "godef" },
+
     // 运行文件
     { "keys": ["f9"], "command": "build" }, 
 
@@ -33,7 +36,7 @@
     { "keys": ["ctrl+j"], "command": "jump_forward"},
     { "keys": ["ctrl+k"], "command": "jump_back"},
 
-    { "keys": ["ctrl+d"], "command": "godef" },
+    
     
     { "keys": ["ctrl+alt+i"], "command": "java_import_path" },    
 
