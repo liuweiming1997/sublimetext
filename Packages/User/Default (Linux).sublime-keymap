@@ -44,5 +44,9 @@
 
     { "keys": "tab", "command": "insert", "args": {"characters": "\t"} },
 
-    { "keys": ["f2"], "command": "rename_file", "args": { "paths": ["$file"] } }
+    { "keys": ["f2"], "command": "rename_file", "args": { "paths": ["$file"] } },
+
+    /*ctags*/
+    {"command": "navigate_to_definition", "keys": ["ctrl+k"]},
+    {"command": "jump_back","keys": ["ctrl+j"]}
 ]
