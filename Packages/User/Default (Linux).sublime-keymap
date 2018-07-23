@@ -48,5 +48,8 @@
 
     /*ctags*/
     {"command": "navigate_to_definition", "keys": ["ctrl+k"]},
-    {"command": "jump_back","keys": ["ctrl+j"]}
+    {"command": "jump_back","keys": ["ctrl+j"]},
+
+    { "keys": ["ctrl+shift+m"], "command": "copy_file_path" },
+    { "keys": ["ctrl+shift+n"], "command": "copy_file_name" }
 ]
