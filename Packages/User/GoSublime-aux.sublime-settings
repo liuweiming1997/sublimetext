@@ -12,6 +12,10 @@
 	[
 		"go test"
 	],
+	"9o.hist./home/vimi/aaaavimidatafile/testpy":
+	[
+		"go run test.go"
+	],
 	"9o.hist./home/vimi/go/src/github.com/sundayfun/go-web/redis":
 	[
 		"go test"
