@@ -9329,3 +9329,17 @@ Gocode pkg: "."
 Gocode env: gocode.margoEnv{LibPath:"/usr/lib/go-1.10/pkg/linux_amd64:/usr/lib/go-1.9/GOPATH/pkg/linux_amd64", GOOS:"linux", GOARCH:"amd64", Compiler:"gc", GOROOT:"/usr/lib/go-1.10", GOPATH:"/usr/lib/go-1.9/GOPATH", InstallSuffix:""}
 Gocode pkg: "."
 Gocode env: gocode.margoEnv{LibPath:"/usr/lib/go-1.10/pkg/linux_amd64:/usr/lib/go-1.9/GOPATH/pkg/linux_amd64", GOOS:"linux", GOARCH:"amd64", Compiler:"gc", GOROOT:"/usr/lib/go-1.10", GOPATH:"/usr/lib/go-1.9/GOPATH", InstallSuffix:""}
+Gocode env: gocode.margoEnv{LibPath:"/usr/lib/go-1.10/pkg/linux_amd64:/home/vimi/go/pkg/linux_amd64", GOOS:"linux", GOARCH:"amd64", Compiler:"gc", GOROOT:"/usr/lib/go-1.10", GOPATH:"/home/vimi/go", InstallSuffix:""}
+Gocode pkg: "github.com/sundayfun/go-web/main-server"
+Gocode pkg: "."
+Gocode pkg: "github.com/sundayfun/go-web/redis"
+Gocode pkg: "github.com/sundayfun/go-web/env"
+Gocode pkg: "github.com/sundayfun/go-web/vendor/golang.org/x/sys/plan9"
+Gocode pkg: "github.com/sundayfun/go-web/vendor/golang.org/x/sys/unix"
+Gocode pkg: "github.com/sundayfun/go-web/vendor/golang.org/x/sys/plan9"
+Gocode pkg: "github.com/sundayfun/go-web/env"
+Gocode pkg: "github.com/sundayfun/go-web/redis"
+Gocode pkg: "github.com/sundayfun/go-web/main-server"
+Gocode pkg: "github.com/sundayfun/go-web/env"
+Gocode env: gocode.margoEnv{LibPath:"/usr/lib/go-1.10/pkg/linux_amd64:/home/vimi/go/pkg/linux_amd64", GOOS:"linux", GOARCH:"amd64", Compiler:"gc", GOROOT:"/usr/lib/go-1.10", GOPATH:"/home/vimi/go", InstallSuffix:""}
+Gocode pkg: "github.com/sundayfun/go-web/redis"

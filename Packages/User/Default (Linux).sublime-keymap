@@ -51,5 +51,8 @@
     {"command": "jump_back","keys": ["ctrl+j"]},
 
     { "keys": ["ctrl+shift+m"], "command": "copy_file_path" },
-    { "keys": ["ctrl+shift+n"], "command": "copy_file_name" }
+    { "keys": ["ctrl+shift+n"], "command": "copy_file_name" },
+
+    //隐藏侧边栏
+    {"keys": ["f1"],"command": "toggle_side_bar"}
 ]
