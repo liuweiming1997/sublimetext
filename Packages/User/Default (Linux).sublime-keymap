@@ -54,5 +54,7 @@
     { "keys": ["ctrl+shift+n"], "command": "copy_file_name" },
 
     //隐藏侧边栏
-    {"keys": ["f1"],"command": "toggle_side_bar"}
+    {"keys": ["f1"],"command": "toggle_side_bar"},
+
+    { "keys": ["ctrl+shift+e"], "command": "open_in_browser" },
 ]
