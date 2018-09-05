@@ -2,7 +2,7 @@
     "env": {
          "GOROOT" : "/usr/lib/go-1.10",
          "GOBIN" : "/home/vimi/go/bin",
-         "GOPATH" : "/home/vimi/go",
+         "GOPATH" : "/usr/lib/go-1.9/GOPATH",
     },
     "fmt_cmd": ["/home/vimi/go/bin/goimports"],
 }
