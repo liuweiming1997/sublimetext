@@ -58,4 +58,7 @@
 
     //在浏览器打开
     { "keys": ["ctrl+o"], "command": "open_in_browser" },
+
+    // 重新build c-tags
+    { "keys": ["ctrl+q"], "command":"rebuild_tags"},
 ]
