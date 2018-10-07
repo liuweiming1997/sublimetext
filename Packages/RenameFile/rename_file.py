@@ -13,7 +13,7 @@ class RenameFileCommand(sublime_plugin.WindowCommand):
         name, ext = os.path.splitext(leaf)
 
         v.sel().clear()
-        v.sel().add(sublime.Region(0, len(name)))
+        v.sel().add(sublime.Region(0, len(leaf)))
 
     def on_done(self, old, branch, leaf):
         new = os.path.join(branch, leaf)
@@ -25,7 +25,7 @@ class RenameFileCommand(sublime_plugin.WindowCommand):
             if v:
                 v.retarget(new)
         except:
-            sublime.status_message("Unable to rename")
+            sublime.message_dialog("Unable to rename")
 
     def is_visible(self, paths):
         return len(paths) == 1
