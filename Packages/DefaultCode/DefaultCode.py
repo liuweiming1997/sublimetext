@@ -27,8 +27,82 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
 			self.go_code(edit)
 		elif suffix == "html":
 			self.html_code(edit)
+		elif suffix == "sh":
+			self.shell_code(edit)
 		else:
 			self.error_code(edit)		
+
+	def shell_code(self, edit):
+		code = """#!/bin/bash
+container_name=(server db)
+server_address=95.163.202.160
+project_name="Frontend"
+
+function deploy() {
+	#  rsync的desc会自动创建一个目录，所以这样就是/root/${project_name}
+	echo "maybe a little bit slow because will push this file to your-server"
+	rsync -avz --delete ../${project_name} root@${server_address}:/root
+
+	cmd="cd ${project_name}/docker;"
+	for data in ${container_name[@]}
+	do  
+	    cmd=${cmd}"docker-compose up --build -d ${data};"
+	done
+
+	ssh root@${server_address} ${cmd}
+}
+
+function localtest() {
+	echo "local debuging....."
+	go run main.go
+}
+
+
+function getRemote() {
+	echo "getting....."
+	rsync -avz --delete root@${server_address}:/root/${project_name} ../
+}
+
+DBUSER=root
+DBHOST=95.163.202.160
+DBNAME=homework
+DBPASSWORD=vimi
+
+#get remote database sql to local
+function dump() {
+	mysqldump -h$DBHOST -u$DBUSER -p$DBPASSWORD $DBNAME > ./db/sql/latest_dump.sql
+}
+
+function restore() {
+	mysql -h$DBHOST -u$DBUSER -p$DBPASSWORD $DBNAME < ./db/sql/latest_dump.sql
+}
+
+case "$1" in
+	deploy)
+		deploy
+		;;
+
+	localtest)
+		localtest
+		;;
+
+	getRemote)
+		getRemote
+		;;
+
+	dump)
+		dump
+		;;
+
+	restore)
+		restore
+		;;
+
+	*)
+		echo "please choose one {dump | restore}"
+		exit 1
+esac"""
+		self.view.insert(edit, 0, code)
 
 	def html_code(self, edit):
 		code = '''<!DOCTYPE html>
@@ -47,10 +121,32 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
     </script>
 
     <body>
-
+    	<form action="http://127.0.0.1:8080" method="post">
+  			<p>First name: <input type="text" name="fname" /></p>
+		    <p>Last name: <input type="text" name="lname" /></p>
+  			<input type="submit" value="Submit" />
+		</form>
     </body>
-</html>
-'''
+
+    <body>
+		<form id="test-form" action="http://127.0.0.1:8080" method="post" onsubmit="return checkForm()">
+		    <p>First name: <input type="text" name="fname" /></p>
+		    <p>Last name: <input type="text" name="lname" /></p>
+  			<input type="submit" value="Submit" />
+		</form>
+
+		<script>
+			function checkForm() {
+			    var form = document.getElementById('test-form');
+			    // 可以在此修改form的input...
+			    // 继续下一步:
+			    form.submit()
+			    return true;
+			}
+		</script>
+    </body>
+
+</html>'''
 		self.view.insert(edit, 0, code)
 
 	def py_code(self, edit):
@@ -70,11 +166,33 @@ int main() {
     return 0;
 }
 """
-
 		self.view.insert(edit, 0, code)
 
 	def go_code(self, edit):
-		self.view.insert(edit, 0, "vimi")
+		code = """package main
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+)
+
+func root(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm() //解析参数，默认是不会解析的
+
+	fmt.Println("get message from " + r.RemoteAddr)
+	fmt.Println(r.Form)
+	fmt.Fprintf(w, "I get your message!") //这个写入到w的是输出到客户端的
+}
+
+func main() {
+	http.HandleFunc("/", root)               //设置访问的路由
+	err := http.ListenAndServe(":8080", nil) //设置监听的端口
+	if err != nil {
+		log.Fatal("ListenAndServe: ", err)
+	}
+}"""
+		self.view.insert(edit, 0, code)
 
 	def js_code(self, edit):
 		code = """function count(start, end) {
@@ -98,4 +216,11 @@ int main() {
 		self.view.insert(edit, 0, code)
 
 	def error_code(self, edit):
-		self.view.insert(edit, 0, "error_code")
+		code = """.PHONY: Frontend
+
+deploy:
+	@./shell/deploy.sh deploy
+
+localtest:
+	@./shell/deploy.sh localtest"""
+		self.view.insert(edit, 0, code)
