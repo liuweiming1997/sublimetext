@@ -29,8 +29,39 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
 			self.html_code(edit)
 		elif suffix == "sh":
 			self.shell_code(edit)
+		elif suffix == "yaml" or suffix == "yml":
+			self.yaml_code(edit)
 		else:
 			self.error_code(edit)		
+
+	def yaml_code(self, edit):
+		code = """version: '3'
+services:
+  main:
+    build:
+      context: ..
+      dockerfile: docker/server.Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+
+  nginx:
+    image: nginx:latest
+    # 端口映射
+    ports:
+        - "80:80"
+    environment:
+        - LANG=en_US.UTF-8
+        - LANGUAGE=en_US:en
+        - LC_ALL=en_US.UTF-8
+    # 数据卷
+    volumes:
+        # 映射主机./conf.d目录到容器/etc/nginx/conf.d目录
+        - "$PWD/nginx.conf:/etc/nginx/conf.d/default.conf"
+        - "/root/show/:/show"
+    restart: always"""
+		self.view.insert(edit, 0, code)
+
 
 	def shell_code(self, edit):
 		code = """#!/bin/bash
