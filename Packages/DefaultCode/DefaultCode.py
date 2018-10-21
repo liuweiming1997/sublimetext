@@ -226,7 +226,9 @@ func main() {
 		self.view.insert(edit, 0, code)
 
 	def js_code(self, edit):
-		code = """function count(start, end) {
+		code = """'use strict';
+
+function count(start, end) {
     console.log(start);
     total = start + 1;
     e = end;
