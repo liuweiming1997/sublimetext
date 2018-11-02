@@ -31,7 +31,7 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
 			self.shell_code(edit)
 		elif suffix == "yaml" or suffix == "yml":
 			self.yaml_code(edit)
-		else:
+		else: # 这个是makefile
 			self.error_code(edit)		
 
 	def yaml_code(self, edit):
@@ -181,7 +181,26 @@ esac"""
 		self.view.insert(edit, 0, code)
 
 	def py_code(self, edit):
-		self.view.insert(edit, 0, "vimi")
+		code = '''#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import json
+
+# 根据文档确定的返回消息
+class resp(object):
+	def __init__(self, success, error, data):
+		self.success = success  # bollean
+		self.error = error	    # string
+		self.data = data        # interface
+
+def work():
+	resp_obj = resp(True, False, [1, 2, 3, 4, "a list"])
+	return json.dumps(resp_obj, default = lambda obj: obj.__dict__, sort_keys=True, indent=4)
+
+if __name__ == '__main__':
+	json_value = work()
+	print(json_value)'''
+		self.view.insert(edit, 0, code)
 
 	def cpp_code(self, edit):
 		code = """#include <bits/stdc++.h>
