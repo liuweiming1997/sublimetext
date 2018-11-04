@@ -229,7 +229,7 @@ import (
 
 func root(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm() //解析参数，默认是不会解析的
-
+	w.Header().Add("Access-Control-Allow-Origin", "*") //设置跨域
 	fmt.Println("get message from " + r.RemoteAddr)
 	fmt.Println(r.Form)
 	fmt.Fprintf(w, "I get your message!") //这个写入到w的是输出到客户端的
@@ -245,26 +245,37 @@ func main() {
 		self.view.insert(edit, 0, code)
 
 	def js_code(self, edit):
-		code = """'use strict';
+		code = """'use strict'
+var url = 'http://95.163.202.160:8080';
 
-function count(start, end) {
-    console.log(start);
-    total = start + 1;
-    e = end;
-    vimi = setInterval(function show() {
-        console.log(total);
-        total++;
-        if (total == e + 1) {
-            clearInterval(vimi)
-        }
-    }, 100);
+function success(text) {
+    var textarea = document.getElementById('id_test');
+    textarea.innerHTML = text;
+}
 
-    return {
-        cancel: function() {
-            clearInterval(vimi);
+function fail(code) {
+    var textarea = document.getElementById('id_test');
+    textarea.innerHTML = 'Error code: ' + code;
+}
+
+var request = new XMLHttpRequest(); // 新建Microsoft.XMLHTTP对象
+request.onreadystatechange = function() { // 状态发生变化时，函数被回调
+    if (request.readyState === 4) { // 成功完成
+        // 判断响应结果:
+        if (request.status === 200) {
+            // 成功，通过responseText拿到响应的文本:
+            return success(request.responseText);
+        } else {
+            // 失败，根据响应码判断失败原因:
+            return fail(request.status);
         }
+    } else {
+        // HTTP请求还在继续...
     }
-}"""
+}
+// 发送请求:
+request.open('GET', url);
+request.send();"""
 		self.view.insert(edit, 0, code)
 
 	def error_code(self, edit):
