@@ -4,7 +4,7 @@
 	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 	"default_line_ending": "unix",
 	"font_face": "YaHei Consolas Hybrid",
-	"font_size": 14,
+	"font_size": 16,
 	"highlight_line": false,
 	"ignored_packages":
 	[
@@ -14,8 +14,9 @@
 	"show_line_endings": true,
 	"spell_check": false,
 	"tab_completion": "enabled",
-	"tab_size": 4,
+	"tab_size": 2,
 	"theme": "Default.sublime-theme",
 	"update_check": false,
-	"word_wrap": false
+	"word_wrap": false,
+	
 }

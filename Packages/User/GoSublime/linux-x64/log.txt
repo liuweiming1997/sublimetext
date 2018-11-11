@@ -12345,3 +12345,8 @@ Gocode env: gocode.margoEnv{LibPath:"/usr/lib/go-1.10/pkg/linux_amd64:/usr/lib/g
 Gocode pkg: "."
 Gocode pkg: "."
 Gocode env: gocode.margoEnv{LibPath:"/usr/lib/go-1.10/pkg/linux_amd64:/usr/lib/go-1.9/GOPATH/pkg/linux_amd64", GOOS:"linux", GOARCH:"amd64", Compiler:"gc", GOROOT:"/usr/lib/go-1.10", GOPATH:"/usr/lib/go-1.9/GOPATH", InstallSuffix:""}
+Gocode pkg: "."
+Gocode env: gocode.margoEnv{LibPath:"/usr/lib/go-1.10/pkg/linux_amd64:/usr/lib/go-1.9/GOPATH/pkg/linux_amd64", GOOS:"linux", GOARCH:"amd64", Compiler:"gc", GOROOT:"/usr/lib/go-1.10", GOPATH:"/usr/lib/go-1.9/GOPATH", InstallSuffix:""}
+margo: nsf/gocode is not enabled in go1.11. See https://margo.kuroku.io/b/migrate/?_r=gs
+margo: nsf/gocode is not enabled in go1.11. See https://margo.kuroku.io/b/migrate/?_r=gs
+margo: nsf/gocode is not enabled in go1.11. See https://margo.kuroku.io/b/migrate/?_r=gs
