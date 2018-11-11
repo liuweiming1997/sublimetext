@@ -181,7 +181,7 @@ esac"""
 		self.view.insert(edit, 0, code)
 
 	def py_code(self, edit):
-		code = '''#!/usr/bin/env python
+		code = '''#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import json

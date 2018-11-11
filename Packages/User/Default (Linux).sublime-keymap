@@ -63,4 +63,5 @@
     { "keys": ["ctrl+q"], "command":"rebuild_tags"},
 
     {"keys": ["ctrl+m"], "command":"default_code", "args":{"args": "cpp"} },
+
 ]
