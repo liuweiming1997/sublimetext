@@ -17,9 +17,10 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
 				index += 1
 
 
+
 		if suffix == "py":
 			self.py_code(edit)
-		elif suffix == "cpp":
+		elif suffix == "cpp" || suffix == "cc":
 			self.cpp_code(edit)
 		elif suffix == "js":
 			self.js_code(edit)
@@ -31,8 +32,24 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
 			self.shell_code(edit)
 		elif suffix == "yaml" or suffix == "yml":
 			self.yaml_code(edit)
+		elif suffix == "h":
+			self.header_file_code(edit)
 		else: # 这个是makefile
-			self.error_code(edit)		
+			self.error_code(edit)
+
+
+	def header_file_code(self, edit):
+			code = """// We use this preprocessor directive to cause the current source file to be included only once
+// in a single compilation.
+#pragma once
+#include "common/experimental/weimingliu/codelab/cpp/josephus.pb.h"
+
+int SolveJosephusProblem(int n, int k);
+
+// Please implement this function add unit test for it
+const ::interface::experimental::weimingliu::Person SolveJosephusProblem(
+    interface::experimental::weimingliu::JosephusProblem);"""
+			self.view.insert(edit, 0, code)
 
 	def yaml_code(self, edit):
 		code = """version: '3'
@@ -210,7 +227,7 @@ using namespace std;
 typedef long long int LL;
 
 
-int main() {
+int main(int argc, char *argv[]) {
     freopen("data.txt", "r", stdin);
 
     return 0;
