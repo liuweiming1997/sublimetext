@@ -20,7 +20,7 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
 
 		if suffix == "py":
 			self.py_code(edit)
-		elif suffix == "cpp" || suffix == "cc":
+		elif suffix == "cpp" or suffix == "cc":
 			self.cpp_code(edit)
 		elif suffix == "js":
 			self.js_code(edit)
