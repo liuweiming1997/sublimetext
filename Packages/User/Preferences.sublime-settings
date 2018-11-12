@@ -17,5 +17,7 @@
 	"tab_size": 2,
 	"theme": "Default.sublime-theme",
 	"update_check": false,
-	"word_wrap": false
+	"word_wrap": false,
+	"preview_on_click": false,
+	"open_files_in_new_window": true
 }

@@ -62,6 +62,9 @@
     // 重新build c-tags
     { "keys": ["ctrl+q"], "command":"rebuild_tags"},
 
+    // 自己写的一个defaultcode
     {"keys": ["ctrl+m"], "command":"default_code", "args":{"args": "cpp"} },
 
+    { "keys": ["ctrl+shift+pageup"], "command": "next_view_in_stack" },
+    { "keys": ["ctrl+shift+pagedown"], "command": "prev_view_in_stack" },
 ]
