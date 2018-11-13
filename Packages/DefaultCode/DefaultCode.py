@@ -3,44 +3,71 @@ import sublime_plugin
 
 
 class DefaultCodeCommand(sublime_plugin.TextCommand):
-	def run(self, edit, args):
-		name = self.view.file_name()
-		suffix = ""
-		index = name.rfind(".")
+  def run(self, edit, args):
+    name = self.view.file_name()
+    suffix = ""
+    index = name.rfind(".")
 
-		if index == -1:
-			suffix = "error_suffix"
-		else:
-			index += 1
-			while index < len(name):
-				suffix += name[index]
-				index += 1
+    if index == -1:
+      suffix = "error_suffix"
+    else:
+      index += 1
+      while index < len(name):
+        suffix += name[index]
+        index += 1
 
 
 
-		if suffix == "py":
-			self.py_code(edit)
-		elif suffix == "cpp" or suffix == "cc":
-			self.cpp_code(edit)
-		elif suffix == "js":
-			self.js_code(edit)
-		elif suffix == "go":
-			self.go_code(edit)
-		elif suffix == "html":
-			self.html_code(edit)
-		elif suffix == "sh":
-			self.shell_code(edit)
-		elif suffix == "yaml" or suffix == "yml":
-			self.yaml_code(edit)
-		elif suffix == "h":
-			self.header_file_code(edit)
-		elif suffix == "proto":
-			self.proto_code(edit)
-		else: # 这个是makefile
-			self.error_code(edit)
+    if suffix == "py":
+      self.py_code(edit)
+      self.middle_ware(edit)
 
-	def proto_code(self, edit):
-		code = """// See README.txt for information and build instructions.
+    elif suffix == "cpp" or suffix == "cc":
+      self.cpp_code(edit)
+      self.middle_ware(edit)
+
+    elif suffix == "js":
+      self.js_code(edit)
+      self.middle_ware(edit)
+
+    elif suffix == "go":
+      self.go_code(edit)
+      self.middle_ware(edit)
+
+    elif suffix == "html":
+      self.html_code(edit)
+      self.middle_ware(edit)
+
+    elif suffix == "sh":
+      self.shell_code(edit)
+      self.middle_ware(edit)
+
+    elif suffix == "yaml" or suffix == "yml":
+      self.yaml_code(edit)
+      self.middle_ware(edit)
+
+    elif suffix == "h":
+      self.header_file_code(edit)
+      self.middle_ware(edit)
+
+    elif suffix == "proto":
+      self.proto_code(edit)
+      self.middle_ware(edit)
+
+    else: # 这个是makefile
+      self.error_code(edit)
+      self.middle_ware(edit)
+
+  def middle_ware(self, edit):
+    code = """Copyright @2018 Pony AI Inc. All rights reserved.
+Authors: weimingliu@pony.ai (Liu weiming)
+
+"""
+    self.view.insert(edit, 0, code)
+
+
+  def proto_code(self, edit):
+    code = """// See README.txt for information and build instructions.
 
 package tutorial;
 
@@ -71,9 +98,9 @@ message AddressBook {
   repeated Person person = 1;
 }
 """
-		self.view.insert(edit, 0, code)
-	def header_file_code(self, edit):
-			code = """// We use this preprocessor directive to cause the current source file to be included only once
+    self.view.insert(edit, 0, code)
+  def header_file_code(self, edit):
+    code = """// We use this preprocessor directive to cause the current source file to be included only once
 // in a single compilation.
 #pragma once
 #include "common/experimental/weimingliu/codelab/cpp/josephus.pb.h"
@@ -83,10 +110,10 @@ int SolveJosephusProblem(int n, int k);
 // Please implement this function add unit test for it
 const ::interface::experimental::weimingliu::Person SolveJosephusProblem(
     interface::experimental::weimingliu::JosephusProblem);"""
-			self.view.insert(edit, 0, code)
+    self.view.insert(edit, 0, code)
 
-	def yaml_code(self, edit):
-		code = """version: '3'
+  def yaml_code(self, edit):
+    code = """version: '3'
 services:
   main:
     build:
@@ -111,11 +138,11 @@ services:
         - "$PWD/nginx.conf:/etc/nginx/conf.d/default.conf"
         - "/root/show/:/show"
     restart: always"""
-		self.view.insert(edit, 0, code)
+    self.view.insert(edit, 0, code)
 
 
-	def shell_code(self, edit):
-		code = """#!/bin/bash
+  def shell_code(self, edit):
+    code = """#!/bin/bash
 container_name=(server db)
 server_address=95.163.202.160
 project_name="Frontend"
@@ -184,10 +211,10 @@ case "$1" in
 		echo "please choose one {dump | restore}"
 		exit 1
 esac"""
-		self.view.insert(edit, 0, code)
+    self.view.insert(edit, 0, code)
 
-	def html_code(self, edit):
-		code = '''<!DOCTYPE html>
+  def html_code(self, edit):
+    code = '''<!DOCTYPE html>
 <html lang = "en">
     <head>
         <meta charset = "utf-8">
@@ -229,10 +256,10 @@ esac"""
     </body>
 
 </html>'''
-		self.view.insert(edit, 0, code)
+    self.view.insert(edit, 0, code)
 
-	def py_code(self, edit):
-		code = '''#!/usr/bin/env python3
+  def py_code(self, edit):
+    code = '''#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import json
@@ -251,10 +278,10 @@ def work():
 if __name__ == '__main__':
 	json_value = work()
 	print(json_value)'''
-		self.view.insert(edit, 0, code)
+    self.view.insert(edit, 0, code)
 
-	def cpp_code(self, edit):
-		code = """#include <bits/stdc++.h>
+  def cpp_code(self, edit):
+    code = """#include <bits/stdc++.h>
 using namespace std;
 
 #define inf (0x3f3f3f3f)
@@ -267,10 +294,10 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 """
-		self.view.insert(edit, 0, code)
+    self.view.insert(edit, 0, code)
 
-	def go_code(self, edit):
-		code = """package main
+  def go_code(self, edit):
+    code = """package main
 
 import (
 	"encoding/json"
@@ -301,10 +328,10 @@ func main() {
 		log.Fatal("ListenAndServe: ", err)
 	}
 }"""
-		self.view.insert(edit, 0, code)
+    self.view.insert(edit, 0, code)
 
-	def js_code(self, edit):
-		code = """'use strict'
+  def js_code(self, edit):
+    code = """'use strict'
 var url = 'http://95.163.202.160:8080';
 
 function success(text) {
@@ -335,14 +362,14 @@ request.onreadystatechange = function() { // 状态发生变化时，函数被�
 // 发送请求:
 request.open('GET', url);
 request.send();"""
-		self.view.insert(edit, 0, code)
+    self.view.insert(edit, 0, code)
 
-	def error_code(self, edit):
-		code = """.PHONY: Frontend
+  def error_code(self, edit):
+    code = """.PHONY: Frontend
 
 deploy:
 	@./shell/deploy.sh deploy
 
 localtest:
 	@./shell/deploy.sh localtest"""
-		self.view.insert(edit, 0, code)
+    self.view.insert(edit, 0, code)

@@ -19,5 +19,7 @@
 	"update_check": false,
 	"word_wrap": false,
 	"preview_on_click": false,
-	"open_files_in_new_window": true
+	"open_files_in_new_window": true,
+	"translate_tabs_to_spaces": true,
+	"expand_tabs_on_save": true
 }
