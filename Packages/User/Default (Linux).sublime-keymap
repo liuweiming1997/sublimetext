@@ -69,5 +69,5 @@
     { "keys": ["ctrl+shift+pagedown"], "command": "prev_view_in_stack" },
 
     { "keys": ["ctrl+u"], "command": "soft_undo" },
-    { "keys": ["ctrl+k", "ctrl+d"], "command": "find_under_expand_skip" },
+    { "keys": ["ctrl+f", "ctrl+d"], "command": "find_under_expand_skip" },
 ]
