@@ -17,6 +17,7 @@
 		"Dockerfile Syntax Highlighting",
 		"Emmet",
 		"FileHeader",
+		"Git blame",
 		"Godef",
 		"GoSublime",
 		"LaTeX Word Count",

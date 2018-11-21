@@ -3,6 +3,7 @@
 	"caret_style": "smooth",
 	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 	"default_line_ending": "unix",
+	"expand_tabs_on_save": true,
 	"font_face": "YaHei Consolas Hybrid",
 	"font_size": 16,
 	"highlight_line": false,
@@ -10,16 +11,15 @@
 	[
 		"Vintage"
 	],
+	"open_files_in_new_window": true,
+	"preview_on_click": false,
 	"show_encoding": true,
 	"show_line_endings": true,
 	"spell_check": false,
 	"tab_completion": "enabled",
 	"tab_size": 2,
 	"theme": "Default.sublime-theme",
-	"update_check": false,
-	"word_wrap": false,
-	"preview_on_click": false,
-	"open_files_in_new_window": true,
 	"translate_tabs_to_spaces": true,
-	"expand_tabs_on_save": true
+	"update_check": false,
+	"word_wrap": false
 }
