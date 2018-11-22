@@ -69,6 +69,23 @@
     { "keys": ["ctrl+shift+pagedown"], "command": "prev_view_in_stack" },
 
     { "keys": ["ctrl+u"], "command": "soft_undo" },
-    { "keys": ["ctrl+f", "ctrl+d"], "command": "find_under_expand_skip" },
-    { "keys": ["ctrl+/"], "command": "align_tab", "args" : {"live_preview" : true} },
+    { "keys": ["ctrl+g", "ctrl+d"], "command": "find_under_expand_skip" },
+  {
+    "keys": ["shift+ctrl+;"], "command": "align_tab",
+    "args" : {
+      "user_input" : ":/f"
+    }
+  },
+  {
+    "keys": ["shift+ctrl+="], "command": "align_tab",
+    "args" : {
+      "user_input" : "=/f"
+    }
+  },
+  {
+    "keys": ["shift+ctrl+-"], "command": "align_tab",
+    "args" : {
+      "user_input" : "=>/f"
+    }
+  }
 ]
