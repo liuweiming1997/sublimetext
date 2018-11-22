@@ -16,18 +16,18 @@
     // { "keys": ["ctrl+d"], "command": "godef" },
 
     // 运行文件
-    { "keys": ["f9"], "command": "build" }, 
+    { "keys": ["f9"], "command": "build" },
 
     //代码格式化
-    { "keys": ["alt+f8"], "command": "reindent" }, 
+    { "keys": ["alt+f8"], "command": "reindent" },
 
     //打开跳去指定行的操作
-   { "keys": ["ctrl+escape"], "command": "show_overlay", "args": {"overlay": "goto", "text": ":"} },    
+   { "keys": ["ctrl+escape"], "command": "show_overlay", "args": {"overlay": "goto", "text": ":"} },
 
    //
    { "keys": ["ctrl+shift+t"], "command": "reopen_last_file" },
    { "keys": ["ctrl+w"], "command": "close" },
-   
+
    /*Terminal plug*/
     { "keys": ["ctrl+shift+o"], "command": "open_terminal_project_folder" },
 
@@ -36,9 +36,9 @@
     { "keys": ["ctrl+j"], "command": "jump_forward"},
     { "keys": ["ctrl+k"], "command": "jump_back"},
 
-    
-    
-    { "keys": ["ctrl+alt+i"], "command": "java_import_path" },    
+
+
+    { "keys": ["ctrl+alt+i"], "command": "java_import_path" },
 
     { "keys": ["ctrl+shift+r"], "command": "reveal_in_side_bar"},
 
@@ -93,5 +93,5 @@
     // Align-Tab
 
 
-    
+    {"keys": ["ctrl+shift+s"], "command": "blame"},
 ]
