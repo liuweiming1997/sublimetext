@@ -5,7 +5,7 @@
 	"default_line_ending": "unix",
 	"expand_tabs_on_save": true,
 	"font_face": "YaHei Consolas Hybrid",
-	"font_size": 16,
+	"font_size": 14,
 	"highlight_line": false,
 	"ignored_packages":
 	[

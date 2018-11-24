@@ -93,7 +93,9 @@
     // Align-Tab
 
     // git-blame
-    {"keys": ["ctrl+shift+s"], "command": "blame"},
+    {"keys": ["ctrl+,"], "command": "blame"},
     { "keys": ["ctrl+left"], "command": "focus_group", "args": { "group": 0 } },
     { "keys": ["ctrl+right"], "command": "focus_group", "args": { "group": 1 } },
+
+    { "keys": ["ctrl+shift+w"], "command": "close_other" },
 ]
