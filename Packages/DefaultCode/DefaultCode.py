@@ -54,13 +54,41 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
       self.proto_code(edit)
       self.middle_ware(edit)
 
+    elif suffix == "dockerfile" or suffix == "Dockerfile":
+      self.dockerfile_code(edit)
+      self.middle_ware(edit)
+
     else: # 这个是makefile
       self.error_code(edit)
       self.middle_ware(edit)
 
+  def dockerfile_code(self, edit):
+    code = """FROM golang:1.9.3-alpine3.7
+
+RUN apk add --no-cache git curl \
+    && curl https://glide.sh/get | sh
+
+COPY . $GOPATH/src/github.com/sundayfun/go-web
+
+WORKDIR $GOPATH/src/github.com/sundayfun/go-web
+
+# RUN glide up
+# RUN glide install -v
+
+WORKDIR $GOPATH/src/github.com/sundayfun/go-web/main-server
+
+RUN go build -o web-crawler web-crawler.go
+
+ENTRYPOINT ["./web-crawler"]
+
+# must use ./main
+
+"""
+    self.view.insert(edit, 0, code)
+
   def middle_ware(self, edit):
-    code = """Copyright @2018 Pony AI Inc. All rights reserved.
-Authors: weimingliu@pony.ai (Liu weiming)
+    code = """// Copyright @2018 Pony AI Inc. All rights reserved.
+// Authors: weimingliu@pony.ai (Liu weiming)
 
 """
     self.view.insert(edit, 0, code)
@@ -154,7 +182,7 @@ function deploy() {
 
 	cmd="cd ${project_name}/docker;"
 	for data in ${container_name[@]}
-	do  
+	do
 	    cmd=${cmd}"docker-compose up --build -d ${data};"
 	done
 
@@ -224,7 +252,7 @@ esac"""
         </meta>
     </head>
 
-    <script src = "main.js"> 
+    <script src = "main.js">
         // 1、逻辑可以写在js，并且在js调用。
         // 2、也可以在这里写，然后调用。这里调用不了main.js的内容
     </script>
