@@ -171,33 +171,43 @@ services:
 
   def shell_code(self, edit):
     code = """#!/bin/bash
-container_name=(server db)
+container_name=(main)
 server_address=95.163.202.160
-project_name="Frontend"
+project_name="homepage-server"
 
 function deploy() {
-	#  rsync的desc会自动创建一个目录，所以这样就是/root/${project_name}
-	echo "maybe a little bit slow because will push this file to your-server"
-	rsync -avz --delete ../${project_name} root@${server_address}:/root
+  #  rsync的desc会自动创建一个目录，所以这样就是/root/${project_name}
+  echo "maybe a little bit slow because will push this file to your-server"
+  rsync -avz --delete ../${project_name} root@${server_address}:/root
 
-	cmd="cd ${project_name}/docker;"
-	for data in ${container_name[@]}
-	do
-	    cmd=${cmd}"docker-compose up --build -d ${data};"
-	done
+  cmd="cd ${project_name}/docker;"
+  for data in ${container_name[@]}
+  do
+      cmd=${cmd}"docker-compose up --build -d ${data};"
+  done
 
-	ssh root@${server_address} ${cmd}
+  ssh root@${server_address} ${cmd}
 }
-
-function localtest() {
-	echo "local debuging....."
-	go run main.go
-}
-
 
 function getRemote() {
-	echo "getting....."
-	rsync -avz --delete root@${server_address}:/root/${project_name} ../
+  echo "getting....."
+  rsync -avz --delete root@${server_address}:/root/${project_name} ../
+}
+
+function stopRemote() {
+  echo "stop....."
+  cmd=""
+  for data in ${container_name[@]}
+  do
+      cmd=${cmd}"docker stop docker_${data}_1;"
+  done
+  echo ${cmd}
+  ssh root@${server_address} ${cmd}
+}
+
+function logRemote() {
+  echo "docker logs -f docker_main_1......"
+  ssh root@${server_address} "docker logs -f docker_main_1"
 }
 
 DBUSER=root
@@ -207,38 +217,43 @@ DBPASSWORD=vimi
 
 #get remote database sql to local
 function dump() {
-	mysqldump -h$DBHOST -u$DBUSER -p$DBPASSWORD $DBNAME > ./db/sql/latest_dump.sql
+  mysqldump -h$DBHOST -u$DBUSER -p$DBPASSWORD $DBNAME > ./db/sql/latest_dump.sql
 }
 
 function restore() {
-	mysql -h$DBHOST -u$DBUSER -p$DBPASSWORD $DBNAME < ./db/sql/latest_dump.sql
+  mysql -h$DBHOST -u$DBUSER -p$DBPASSWORD $DBNAME < ./db/sql/latest_dump.sql
 }
 
 case "$1" in
-	deploy)
-		deploy
-		;;
+  deploy)
+    deploy
+    ;;
 
-	localtest)
-		localtest
-		;;
+  stopRemote)
+    stopRemote
+    ;;
 
-	getRemote)
-		getRemote
-		;;
+  getRemote)
+    getRemote
+    ;;
 
-	dump)
-		dump
-		;;
+  logRemote)
+    logRemote
+    ;;
 
-	restore)
-		restore
-		;;
+  dump)
+    dump
+    ;;
 
-	*)
-		echo "please choose one {dump | restore}"
-		exit 1
-esac"""
+  restore)
+    restore
+    ;;
+
+  *)
+    echo "please choose one {dump | restore}"
+    exit 1
+esac
+"""
     self.view.insert(edit, 0, code)
 
   def html_code(self, edit):
@@ -396,11 +411,15 @@ alert("function");"""
     self.view.insert(edit, 0, code)
 
   def error_code(self, edit):
-    code = """.PHONY: Frontend
+    code = """.PHONY: homepage-server
 
 deploy:
-	@./shell/deploy.sh deploy
+  @./shell/deploy.sh deploy
 
-localtest:
-	@./shell/deploy.sh localtest"""
+stopRemote:
+  @./shell/deploy.sh stopRemote
+
+logRemote:
+  @./shell/deploy.sh logRemote
+"""
     self.view.insert(edit, 0, code)
