@@ -63,24 +63,17 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
       self.middle_ware(edit)
 
   def dockerfile_code(self, edit):
-    code = """FROM golang:1.9.3-alpine3.7
+    code = """FROM python:3
 
-RUN apk add --no-cache git curl \
-    && curl https://glide.sh/get | sh
+ARG WORKSPACE="/python3/homepage-server"
+COPY . ${WORKSPACE}
 
-COPY . $GOPATH/src/github.com/sundayfun/go-web
+WORKDIR ${WORKSPACE}/docker
+RUN pip install --no-cache-dir -r ./requirements.txt
 
-WORKDIR $GOPATH/src/github.com/sundayfun/go-web
+WORKDIR ${WORKSPACE}
 
-# RUN glide up
-# RUN glide install -v
-
-WORKDIR $GOPATH/src/github.com/sundayfun/go-web/main-server
-
-RUN go build -o web-crawler web-crawler.go
-
-ENTRYPOINT ["./web-crawler"]
-
+CMD ["python3", "app.py"]
 # must use ./main
 
 """
