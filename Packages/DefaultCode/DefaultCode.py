@@ -58,10 +58,24 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
       self.dockerfile_code(edit)
       self.middle_ware(edit)
 
+    elif suffix == "env":
+      self.env_code(edit)
+      self.middle_ware(edit)
+
     else: # 这个是makefile
       self.error_code(edit)
       self.middle_ware(edit)
 
+  def env_code(self, edit):
+    code = """MYSQL_ROOT_PASSWORD=root
+MYSQL_DATABASE=homework
+DB_HOST=db
+Telegram_Token=your token
+Redis_Host=redis:6379
+HTTP_PROXY=socks5://sslocal:1080
+HTTPS_PROXY=socks5://sslocal:1080
+"""
+    self.view.insert(edit, 0, code)
   def dockerfile_code(self, edit):
     code = """FROM python:3
 
@@ -164,7 +178,7 @@ services:
 
   def shell_code(self, edit):
     code = """#!/bin/bash
-container_name=(main)
+container_name=(main db restore)
 server_address=95.163.202.160
 project_name="homepage-server"
 
@@ -203,18 +217,13 @@ function logRemote() {
   ssh root@${server_address} "docker logs -f docker_main_1"
 }
 
-DBUSER=root
-DBHOST=95.163.202.160
-DBNAME=homework
-DBPASSWORD=vimi
-
 #get remote database sql to local
 function dump() {
-  mysqldump -h$DBHOST -u$DBUSER -p$DBPASSWORD $DBNAME > ./db/sql/latest_dump.sql
+  mysqldump -h${DB_HOST} -u$root -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} > ./db/sql/latest_dump.sql
 }
 
 function restore() {
-  mysql -h$DBHOST -u$DBUSER -p$DBPASSWORD $DBNAME < ./db/sql/latest_dump.sql
+  mysql -h${DB_HOST} -uroot -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} < ./db/sql/latest_dump.sql
 }
 
 case "$1" in
@@ -414,5 +423,8 @@ stopRemote:
 
 logRemote:
   @./shell/deploy.sh logRemote
+
+getRemote:
+  @./shell/deploy.sh getRemote
 """
     self.view.insert(edit, 0, code)
