@@ -6,7 +6,8 @@
     "default_line_ending": "unix",
     "font_face": "YaHei Consolas Hybrid",
     "font_size": 14,
-    "highlight_line": false,
+    "highlight_line": true,
+    "save_on_focus_lost": true,
     "ignored_packages":
     [
         "Vintage"
