@@ -1,19 +1,4 @@
 {
-<<<<<<< 2970cb1c6ce178e43606b638730d8c8fb8c4b14d
-<<<<<<< 6e5b949cddae669f18b754488271160436df21d8
-    "last-modified": "Thu, 29 Nov 2018 07:40:07 GMT", 
-    "etag": "\"5bff97d7-54512\""
-=======
-    "last-modified": "Mon, 26 Nov 2018 12:40:07 GMT", 
-    "etag": "\"5bfbe9a7-5473e\""
->>>>>>> 修改各种code
-=======
-<<<<<<< 79cab5a0af76ba7a49ef8b236108fa69c0eecd71
-    "last-modified": "Mon, 26 Nov 2018 12:40:07 GMT", 
-    "etag": "\"5bfbe9a7-5473e\""
-=======
-    "etag": "\"5bfca077-5473d\"", 
-    "last-modified": "Tue, 27 Nov 2018 01:40:07 GMT"
->>>>>>> 为makefile修改bug
->>>>>>> 为makefile修改bug
+    "etag": "\"5c01ccaf-54101\"", 
+    "last-modified": "Fri, 30 Nov 2018 23:50:07 GMT"
 }

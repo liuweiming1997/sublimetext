@@ -150,40 +150,79 @@ const ::interface::experimental::weimingliu::Person SolveJosephusProblem(
   def yaml_code(self, edit):
     code = """version: '3'
 services:
-  main:
+  homepage_server:
     build:
       context: ..
-      dockerfile: docker/server.Dockerfile
+      dockerfile: docker/server.dockerfile
+    volumes:
+      - ${PWD}/../volumes/log:/log
+      - ${PWD}/../volumes/tmp:/tmp
     ports:
-      - "8080:8080"
+      - "1121:1121"
     restart: always
+    container_name: "homepage_server"
+    depends_on:
+      - homepage_db
+
+  homepage_db:
+    image: mysql:5.7
+    volumes:
+      - ${PWD}/../volumes/mysql_data:/var/lib/mysql
+    ports:
+      - "127.0.0.1:1120:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    restart: always
+    container_name: "homepage_db"
+
+  homepage_restore:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    volumes:
+      - ../db:/db
+      - ../shell:/shell
+    depends_on:
+      - homepage_db
+    links:
+      - homepage_db
+    command: "./shell/deploy.sh restore"
+    container_name: "homepage_restore"
 
   nginx:
     image: nginx:latest
-    # 端口映射
     ports:
         - "80:80"
     environment:
-        - LANG=en_US.UTF-8
-        - LANGUAGE=en_US:en
-        - LC_ALL=en_US.UTF-8
-    # 数据卷
+      - LANG=en_US.UTF-8
+      - LANGUAGE=en_US:en
+      - LC_ALL=en_US.UTF-8
     volumes:
-        # 映射主机./conf.d目录到容器/etc/nginx/conf.d目录
-        - "$PWD/nginx.conf:/etc/nginx/conf.d/default.conf"
-        - "/root/show/:/show"
-    restart: always"""
+      # 映射主机./conf.d目录到容器/etc/nginx/conf.d目录
+      - "$PWD/nginx.conf:/etc/nginx/conf.d/default.conf"
+      - "/root/show/:/show"
+    restart: always
+    container_name: "nginx"
+"""
     self.view.insert(edit, 0, code)
 
 
   def shell_code(self, edit):
     code = """#!/bin/bash
-container_name=(main db restore)
+container_name=(homepage_server homepage_db homepage_restore)
 server_address=95.163.202.160
 project_name="homepage-server"
 
 function deploy() {
+  stopRemote
+
+  echo "===================================>"
   #  rsync的desc会自动创建一个目录，所以这样就是/root/${project_name}
+  echo "deploy....."
   echo "maybe a little bit slow because will push this file to your-server"
   rsync -avz --delete ../${project_name} root@${server_address}:/root
 
@@ -192,7 +231,7 @@ function deploy() {
   do
       cmd=${cmd}"docker-compose up --build -d ${data};"
   done
-
+  echo ${cmd}
   ssh root@${server_address} ${cmd}
 }
 
@@ -206,15 +245,15 @@ function stopRemote() {
   cmd=""
   for data in ${container_name[@]}
   do
-      cmd=${cmd}"docker stop docker_${data}_1;"
+      cmd=${cmd}"docker rm -f ${data} || true;"
   done
   echo ${cmd}
   ssh root@${server_address} ${cmd}
 }
 
 function logRemote() {
-  echo "docker logs -f docker_main_1......"
-  ssh root@${server_address} "docker logs -f docker_main_1"
+  echo "docker logs -f ${container_name[0]}......"
+  ssh root@${server_address} "docker logs -f ${container_name[0]}"
 }
 
 #get remote database sql to local
@@ -223,6 +262,9 @@ function dump() {
 }
 
 function restore() {
+  second=10
+  echo "sleep ${second} seconds to wait db start"
+  sleep ${second}
   mysql -h${DB_HOST} -uroot -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} < ./db/sql/latest_dump.sql
 }
 
