@@ -54,7 +54,7 @@
     { "keys": ["ctrl+alt+n"], "command": "copy_file_name" },
 
     //隐藏侧边栏
-    {"keys": ["f2"],"command": "toggle_side_bar"},
+    {"keys": ["f1"],"command": "toggle_side_bar"},
 
     //在浏览器打开
     { "keys": ["ctrl+o"], "command": "open_in_browser" },
@@ -98,4 +98,6 @@
     { "keys": ["ctrl+right"], "command": "focus_group", "args": { "group": 1 } },
 
     { "keys": ["ctrl+shift+w"], "command": "close_other" },
+
+    { "keys": ["ctrl+shift+q"], "command": "exit" },
 ]

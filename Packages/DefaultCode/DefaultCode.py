@@ -98,6 +98,7 @@ CMD ["python3", "app.py"]
 // Authors: weimingliu@pony.ai (Liu weiming)
 
 """
+    code = ""
     self.view.insert(edit, 0, code)
 
 
@@ -268,6 +269,7 @@ function restore() {
   second=10
   echo "sleep ${second} seconds to wait db start"
   sleep ${second}
+  echo "mysql -h${DB_HOST} -uroot -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} < ./db/sql/latest_dump.sql"
   mysql -h${DB_HOST} -uroot -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} < ./db/sql/latest_dump.sql
 }
 
