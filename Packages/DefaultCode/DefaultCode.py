@@ -158,6 +158,10 @@ services:
     volumes:
       - ${PWD}/../volumes/log:/log
       - ${PWD}/../volumes/tmp:/tmp
+    environment:
+      - MYSQL_DB_HOST=${DB_HOST}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
     ports:
       - "1121:1121"
     restart: always
