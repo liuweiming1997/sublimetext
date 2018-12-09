@@ -22,7 +22,7 @@
     { "keys": ["alt+f8"], "command": "reindent" },
 
     //打开跳去指定行的操作
-   { "keys": ["ctrl+escape"], "command": "show_overlay", "args": {"overlay": "goto", "text": ":"} },
+   { "keys": ["ctrl+\\"], "command": "show_overlay", "args": {"overlay": "goto", "text": ":"} },
 
    //
    { "keys": ["ctrl+shift+t"], "command": "reopen_last_file" },
