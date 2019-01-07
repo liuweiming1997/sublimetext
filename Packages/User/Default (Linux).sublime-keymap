@@ -50,7 +50,7 @@
     {"command": "navigate_to_definition", "keys": ["ctrl+k"]},
     {"command": "jump_back","keys": ["ctrl+j"]},
 
-    { "keys": ["ctrl+alt+p"], "command": "copy_file_path" },
+    { "keys": ["ctrl+alt+p"], "command": "copy_path" },
     { "keys": ["ctrl+alt+n"], "command": "side_bar_copy_name" },
 
     //隐藏侧边栏
