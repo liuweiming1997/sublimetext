@@ -100,4 +100,6 @@
     { "keys": ["ctrl+shift+w"], "command": "close_other" },
 
     { "keys": ["ctrl+shift+q"], "command": "exit" },
+
+    { "keys": ["ctrl+t"], "command": "new_file" },
 ]
