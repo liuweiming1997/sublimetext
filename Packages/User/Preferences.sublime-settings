@@ -10,7 +10,11 @@
 	],
 	"folder_exclude_patterns":
 	[
-		"node_modules"
+		"node_modules",
+		".svn",
+		".git",
+		".hg", 
+		"CVS"
 	],
 	"font_face": "YaHei Consolas Hybrid",
 	"font_size": 15,
