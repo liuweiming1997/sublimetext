@@ -14,7 +14,8 @@
 		".svn",
 		".git",
 		".hg", 
-		"CVS"
+		"CVS",
+		"__pycache__"
 	],
 	"font_face": "YaHei Consolas Hybrid",
 	"font_size": 15,
