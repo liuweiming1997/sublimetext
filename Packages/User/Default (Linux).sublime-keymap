@@ -102,4 +102,6 @@
     { "keys": ["ctrl+shift+q"], "command": "exit" },
 
     { "keys": ["ctrl+t"], "command": "new_file" },
+    { "keys": ["ctrl+up"], "command": "focus_side_bar" },
+    { "keys": ["ctrl+down"], "command": "focus_side_bar" },
 ]
