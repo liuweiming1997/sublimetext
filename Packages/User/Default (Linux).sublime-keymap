@@ -47,8 +47,9 @@
     {"command": "jump_back","keys": ["ctrl+j"]},
 
     /* sublime self */
-    { "keys": ["ctrl+j"], "command": "jump_back"},
-    { "keys": ["ctrl+i"], "command": "goto_reference"},
+    { "keys": ["ctrl+h"], "command": "jump_back"},
+    { "keys": ["ctrl+l"], "command": "jump_forward"},
+    { "keys": ["ctrl+j"], "command": "goto_reference"},
     { "keys": ["ctrl+k"], "command": "goto_definition"},
 
 
