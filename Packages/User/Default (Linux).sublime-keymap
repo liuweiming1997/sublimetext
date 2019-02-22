@@ -33,10 +33,6 @@
 
     { "command": "add_info", "keys": ["ctrl+shift+."] },
 
-    { "keys": ["ctrl+j"], "command": "jump_forward"},
-    { "keys": ["ctrl+k"], "command": "jump_back"},
-
-
 
     { "keys": ["ctrl+alt+i"], "command": "java_import_path" },
 
@@ -49,6 +45,12 @@
     /*ctags*/
     {"command": "navigate_to_definition", "keys": ["ctrl+k"]},
     {"command": "jump_back","keys": ["ctrl+j"]},
+
+    /* sublime self */
+    { "keys": ["ctrl+j"], "command": "jump_back"},
+    { "keys": ["ctrl+i"], "command": "goto_reference"},
+    { "keys": ["ctrl+k"], "command": "goto_definition"},
+
 
     { "keys": ["ctrl+alt+p"], "command": "copy_path" },
     { "keys": ["ctrl+alt+n"], "command": "side_bar_copy_name" },
