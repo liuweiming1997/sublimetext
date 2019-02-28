@@ -6,5 +6,5 @@
         "save-only" - Linting works in file save only
     */
 [
-    {"anaconda_linting_behaviour": "save-only"},
+    {"anaconda_linting_behaviour": "always"},
 ]
