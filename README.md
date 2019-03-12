@@ -4,7 +4,9 @@
 
 ### first download sublime_text, do not start it before it.
 
-* cd ~.config/sublime-text-3
+* start sublime for build `~/.config/sublime-text-3` floder
+* [git clone https://github.com/GitHubNull/YaHei-Consolas-Hybrid-1.12.git && sh YaHei-Consolas-Hybrid-1.12/setup.sh && cd - && rm -rf YaHei-Consolas-Hybrid-1.12](https://github.com/GitHubNull/YaHei-Consolas-Hybrid-1.12)
+* cd ~./config/sublime-text-3
 * rm -rf InstalledPackages
 * rm -rf Packages
 * git init
