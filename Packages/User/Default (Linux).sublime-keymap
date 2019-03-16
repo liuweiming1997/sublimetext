@@ -42,24 +42,30 @@
 
     { "keys": ["f2"], "command": "rename_file", "args": { "paths": ["$file"] } },
 
+//************************************************************************************
     /*ctags*/
-    {"command": "navigate_to_definition", "keys": ["ctrl+k"]},
-    {"command": "jump_back","keys": ["ctrl+j"]},
+    // {"command": "navigate_to_definition", "keys": ["ctrl+k"]},
+    // {"command": "jump_back","keys": ["ctrl+j"]},
 
     /* sublime self */
-    { "keys": ["ctrl+h"], "command": "jump_back"},
-    { "keys": ["ctrl+l"], "command": "jump_forward"},
-    {
-        "command": "anaconda_doc", "keys": ["ctrl+j"], "context": [
-            {"key": "selector", "operator": "equal", "operand": "source.python"}
-        ]
-    },
-    {
-        "command": "anaconda_goto", "keys": ["ctrl+k"], "context": [
-            {"key": "selector", "operator": "equal", "operand": "source.python"}
-        ]
-    },
+    { "keys": ["ctrl+h"], "command": "move", "args": {"by": "characters", "forward": false} },
+    { "keys": ["ctrl+l"], "command": "move", "args": {"by": "characters", "forward": true} },
+    { "keys": ["ctrl+k"], "command": "move", "args": {"by": "lines", "forward": false} },
+    { "keys": ["ctrl+j"], "command": "move", "args": {"by": "lines", "forward": true} },
 
+    // { "keys": ["ctrl+h"], "command": "jump_back"},
+    // { "keys": ["ctrl+l"], "command": "jump_forward"},
+    // {
+    //     "command": "anaconda_doc", "keys": ["ctrl+j"], "context": [
+    //         {"key": "selector", "operator": "equal", "operand": "source.python"}
+    //     ]
+    // },
+    // {
+    //     "command": "anaconda_goto", "keys": ["ctrl+k"], "context": [
+    //         {"key": "selector", "operator": "equal", "operand": "source.python"}
+    //     ]
+    // },
+//************************************************************************************
 
     { "keys": ["ctrl+alt+p"], "command": "copy_path" },
     { "keys": ["ctrl+alt+n"], "command": "side_bar_copy_name" },
