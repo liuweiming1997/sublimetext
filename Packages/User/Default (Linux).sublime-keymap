@@ -114,5 +114,8 @@
     { "keys": ["ctrl+down"], "command": "focus_side_bar" },
 
     // open url
-    { "keys": ["alt+enter"], "command": "open_url_under_cursor" }
+    { "keys": ["alt+enter"], "command": "open_url_under_cursor" },
+
+    // sort import
+    { "keys": ["ctrl+alt+f"], "command": "sort_import" },
 ]
