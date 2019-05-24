@@ -57,7 +57,7 @@
     // {"command": "jump_back","keys": ["ctrl+j"]},
 
     /* sublime self goto_define*/
-    { "keys": ["ctrl+["], "command": "goto_definition" },
+    { "keys": ["ctrl+i"], "command": "goto_definition" },
     { "keys": ["ctrl+]"], "command": "goto_symbol_in_project" },
     /* sublime self */
 
