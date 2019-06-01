@@ -121,5 +121,5 @@
     { "keys": ["alt+enter"], "command": "open_url_under_cursor" },
 
     // sort import
-    { "keys": ["ctrl+alt+f"], "command": "sort_import" },
+    { "keys": ["ctrl+\\"], "command": "sort_import" },
 ]
