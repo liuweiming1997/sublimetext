@@ -3,6 +3,7 @@ import datetime
 import time
 import sys
 import abc
+import copy
 
 import sublime, sublime_plugin
 
@@ -30,17 +31,31 @@ class SortImportCommand(sublime_plugin.TextCommand):
         self.line_number += 1
         return fp.readline()
 
+    def mulity_annotation(self, pattern):
+        if len(pattern) >= 3 and pattern[0] == '"' and pattern[1] == '"' and pattern[2] == '"':
+            return True
+        return False
+
     def search_file(self, file_path_name, groups):
         var_for_kill = 0
         re = RegexUtil.get_regex(must_contain=['import', 'include'])
-        should_end = RegexUtil.get_regex(must_contain='class')
+        should_end = RegexUtil.get_regex(must_contain='class ')
         with open(file_path_name, 'r') as fp:
             while var_for_kill < MAX_TRY_TIMES:
                 var_for_kill += 1
                 group = []
+                always_continue = False
                 while True:
                     one_line = self.get_line(fp)
                     one_line = self.remove_trilling_space_and_line_change_key(one_line)
+                    if self.mulity_annotation(one_line):
+                        if always_continue:
+                            always_continue = False
+                            continue
+                        else:
+                            always_continue = True
+                    if always_continue:
+                        continue
                     if len(one_line) == 0:
                         break
                     if one_line[0] == '#' or one_line[0] == '/':
@@ -76,18 +91,28 @@ class SortImportCommand(sublime_plugin.TextCommand):
         print(groups)
         print(self.line_number)
 
+
+        update = False
         after_change = ''
         for value in groups:
+            temp = copy.deepcopy(value)
             value.sort()
+            for idx in range(0, len(value)):
+                if (value[idx] != temp[idx]):
+                    update = True
+
             for v in value:
                 after_change += v
                 after_change += '\n'
             after_change += '\n'
+        after_change = after_change[:-2]
         print(after_change)
         # with open(file_name, 'r') as fp:
 
-        buf = self.view.window().new_file()
-        buf.run_command('insert_commit_description', {'desc': after_change, 'scratch_view_name': 'sort import'})
+        if update:
+            self.view.show_popup('!!!!!! update !!!!!!!!!')
+        # buf = self.view.window().new_file()
+        # buf.run_command('insert_commit_description', {'desc': after_change, 'scratch_view_name': 'sort import'})
         sublime.set_clipboard(after_change)
         # self.view.run_command("insert_snippet",
         #     {
