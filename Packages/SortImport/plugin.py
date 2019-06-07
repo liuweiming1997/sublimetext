@@ -1,9 +1,17 @@
+"""
+    pony.hello hello
+"""
 import os
 import datetime
 import time
 import sys
 import abc
 import copy
+from sys import (
+    path,
+    api_version,
+    call_tracing,
+)
 
 import sublime, sublime_plugin
 
@@ -83,7 +91,7 @@ class SortImportCommand(sublime_plugin.TextCommand):
                     groups.append(group)
 
 
-    def run(self, edit):
+    def version_one(self):
         self.line_number = 0
         file_path_name = self.view.file_name()
         groups = []
@@ -107,15 +115,85 @@ class SortImportCommand(sublime_plugin.TextCommand):
             after_change += '\n'
         after_change = after_change[:-2]
         print(after_change)
-        # with open(file_name, 'r') as fp:
 
         if update:
             self.view.show_popup('!!!!!! update !!!!!!!!!')
         # buf = self.view.window().new_file()
         # buf.run_command('insert_commit_description', {'desc': after_change, 'scratch_view_name': 'sort import'})
         sublime.set_clipboard(after_change)
-        # self.view.run_command("insert_snippet",
-        #     {
-        #         "contents": "%s" % datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        #     }
-        # )
+#################################################################################################################
+
+    
+    def read_line(self, s):
+        idx = 0
+        while s[idx] != '\n':
+            idx += 1
+        return s[:idx], idx
+
+    def translate_str(self, tot_str) -> '[[], [], []], str':
+        if tot_str[-1] != '\n':
+            tot_str += '\n'
+        result, sub_result, start_idx, try_time, still_continue, header = [], [], 0, 0, False, ''
+        while True:
+            try_time += 1
+            if try_time == MAX_TRY_TIMES:
+                return None
+            if start_idx >= len(tot_str):
+                break
+            one_line, add = self.read_line(tot_str[start_idx:])
+            start_idx += add + 1
+
+            if self.mulity_annotation(one_line):
+                header += one_line + '\n'
+                still_continue = not still_continue
+                continue
+            if still_continue:
+                header += one_line + '\n'
+                continue
+
+            if one_line == '':
+                result.append(sub_result)
+                sub_result = []
+            elif one_line[-1] == '(':
+                sort_inside = []
+                while True:
+                    temp_line, add = self.read_line(tot_str[start_idx:])
+                    start_idx += add + 1
+                    if temp_line[-1] == ')':
+                        break
+                    else:
+                        sort_inside.append(temp_line)
+                sort_inside.sort()
+                one_line += '\n'
+                for value in sort_inside:
+                    one_line += value + '\n'
+                one_line += ')'
+                sub_result.append(one_line)
+            else:
+                sub_result.append(one_line)
+
+        if len(sub_result) > 0:
+            result.append(sub_result)
+        return result, header
+
+    def version_two(self, edit):
+        region = self.view.sel()[0]
+        if region.empty():
+            self.view.show_popup('empty')
+            return
+        tot_str = self.view.substr(region)
+        arr_str, header = self.translate_str(tot_str)
+        if arr_str is None:
+            self.view.show_popup('fuck, many time')
+            return
+        ans = header
+        for value in arr_str:
+            value.sort()
+            for k in value:
+                ans += k + '\n'
+            ans += '\n'
+        self.view.replace(edit, region, ans[:-2])
+
+    def run(self, edit):
+        # self.version_one()
+        self.version_two(edit)
