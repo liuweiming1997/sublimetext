@@ -17,6 +17,8 @@ import sublime, sublime_plugin
 
 from .lib.RegexUtil import RegexUtil
 
+def cmp_func(key):
+    return str(key).lower()
 
 MAX_TRY_TIMES = 200
 
@@ -80,7 +82,7 @@ class SortImportCommand(sublime_plugin.TextCommand):
                                 if new_line[-1] == ')':
                                     break
                                 sort_inside.append(new_line)
-                            sort_inside.sort()
+                            sort_inside.sort(key=cmp_func)
                             for value in sort_inside:
                                 one_line += value + '\n'
                             one_line += ')'
@@ -104,7 +106,7 @@ class SortImportCommand(sublime_plugin.TextCommand):
         after_change = ''
         for value in groups:
             temp = copy.deepcopy(value)
-            value.sort()
+            value.sort(key=cmp_func)
             for idx in range(0, len(value)):
                 if (value[idx] != temp[idx]):
                     update = True
@@ -163,7 +165,7 @@ class SortImportCommand(sublime_plugin.TextCommand):
                         break
                     else:
                         sort_inside.append(temp_line)
-                sort_inside.sort()
+                sort_inside.sort(key=cmp_func)
                 one_line += '\n'
                 for value in sort_inside:
                     one_line += value + '\n'
@@ -188,7 +190,7 @@ class SortImportCommand(sublime_plugin.TextCommand):
             return
         ans = header
         for value in arr_str:
-            value.sort()
+            value.sort(key=cmp_func)
             for k in value:
                 ans += k + '\n'
             ans += '\n'
