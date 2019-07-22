@@ -3,6 +3,7 @@
 	"caret_style": "smooth",
 	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 	"default_line_ending": "unix",
+	"dictionary": "Packages/Dictionaries/English (British).dic",
 	"expand_tabs_on_save": true,
 	"file_exclude_patterns":
 	[
@@ -33,7 +34,7 @@
 	"save_on_focus_lost": true,
 	"show_encoding": true,
 	"show_line_endings": true,
-	"spell_check": false,
+	"spell_check": true,
 	"tab_completion": "enabled",
 	"tab_size": 2,
 	"theme": "Default.sublime-theme",
