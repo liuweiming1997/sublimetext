@@ -12,6 +12,8 @@
 * git init
 * git pull https://github.com/liuweiming1997/sublimetext.git
 
+file index: fuck you
+  https://www.sublimetext.com/blog/articles/file-indexing
 
 ### TODO:
 ### script file auto upload
