@@ -52,14 +52,12 @@
     { "keys": ["ctrl+]"], "command": "goto_symbol_in_project" },
     /* sublime self */
 
-    // { "keys": ["ctrl+h"], "command": "move", "args": {"by": "characters", "forward": false} },
-    // { "keys": ["ctrl+l"], "command": "move", "args": {"by": "characters", "forward": true} },
     { "keys": ["ctrl+k"], "command": "move", "args": {"by": "lines", "forward": false} },
     { "keys": ["ctrl+j"], "command": "move", "args": {"by": "lines", "forward": true} },
-    { "keys": ["ctrl+h"], "command": "move", "args": {"by": "characters", "forward": false} },
-    { "keys": ["ctrl+l"], "command": "move", "args": {"by": "characters", "forward": true} },
+    // { "keys": ["ctrl+h"], "command": "move", "args": {"by": "characters", "forward": false} },
+    // { "keys": ["ctrl+l"], "command": "move", "args": {"by": "characters", "forward": true} },
 
-    { "keys": ["ctrl+u"], "command": "jump_back"},
+    { "keys": ["ctrl+h"], "command": "jump_back"},
     // { "keys": ["ctrl+l"], "command": "jump_forward"},
 
 //************************************************************************************
