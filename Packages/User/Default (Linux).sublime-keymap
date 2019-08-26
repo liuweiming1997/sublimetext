@@ -49,7 +49,7 @@
 
     /* sublime self goto_define*/
     { "keys": ["ctrl+i"], "command": "goto_definition" },
-    { "keys": ["ctrl+]"], "command": "goto_symbol_in_project" },
+    { "keys": ["ctrl+8"], "command": "goto_reference" },
     /* sublime self */
 
     { "keys": ["ctrl+k"], "command": "move", "args": {"by": "lines", "forward": false} },
