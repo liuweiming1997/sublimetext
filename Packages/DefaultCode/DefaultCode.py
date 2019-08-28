@@ -61,10 +61,30 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
     elif suffix == "env":
       self.env_code(edit)
       self.middle_ware(edit)
-
+    elif suffix == "tsx":
+      self.tsx_code(edit)
     else: # 这个是makefile
       self.error_code(edit)
       self.middle_ware(edit)
+
+  def tsx_code(self, edit):
+    code = """import React from 'react';
+import { withStyles, StyleRulesCallback, WithStyles } from '@material-ui/core/styles';
+
+const styles: StyleRulesCallback = () => ({});
+
+interface Props extends WithStyles<typeof styles> {}
+interface State {}
+
+class ShiftScheduler extends React.PureComponent<Props, State> {
+  render(): React.ReactElement {
+    return <div> hello world </div>;
+  }
+}
+
+export default withStyles(styles)(ShiftScheduler);
+"""
+    self.view.insert(edit, 0, code)
 
   def env_code(self, edit):
     code = """MYSQL_ROOT_PASSWORD=root
