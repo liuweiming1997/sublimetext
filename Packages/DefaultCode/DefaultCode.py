@@ -71,18 +71,30 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
     code = """import React from 'react';
 import { withStyles, StyleRulesCallback, WithStyles } from '@material-ui/core/styles';
 
+import { withRegion } from 'common/RegionContext';
+
 const styles: StyleRulesCallback = () => ({});
 
-interface Props extends WithStyles<typeof styles> {}
-interface State {}
+interface Props extends WithStyles<typeof styles> {
+  regionContext: { region: number };
+}
 
-class ShiftScheduler extends React.PureComponent<Props, State> {
-  render(): React.ReactElement {
+class MapNameSinglePicker extends React.PureComponent<Props> {
+  public componentDidMount() {}
+
+  public componentDidUpdate(prevProps: Readonly<Props>): void {
+    const {
+      regionContext: { region },
+    } = this.props;
+    if (prevProps.regionContext.region === region) return;
+  }
+
+  public render(): React.ReactElement {
     return <div> hello world </div>;
   }
 }
 
-export default withStyles(styles)(ShiftScheduler);
+export default withRegion(withStyles(styles)(MapNameSinglePicker));
 """
     self.view.insert(edit, 0, code)
 
