@@ -1,3 +1,7 @@
 {
-	"api_key": "e88e241b-6497-4149-9ade-1f49c8cbd5e2"
+	"api_key": "e88e241b-6497-4149-9ade-1f49c8cbd5e2",
+  "status_bar_enabled": true,
+  // Show today's coding activity in WakaTime status bar item.
+  // Defaults to true.
+  "status_bar_coding_activity": false,
 }
