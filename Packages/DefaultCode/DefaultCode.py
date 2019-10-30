@@ -69,32 +69,46 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
 
   def tsx_code(self, edit):
     code = """import React from 'react';
-import { withStyles, StyleRulesCallback, WithStyles } from '@material-ui/core/styles';
+import { withStyles, StyleRulesCallback, WithStyles, Theme } from '@material-ui/core/styles';
+import { throttle } from 'lodash';
 
 import { withRegion } from 'common/RegionContext';
+import vehiclesApi from 'common/api/vehiclesApi';
 
-const styles: StyleRulesCallback = () => ({});
+const styles: StyleRulesCallback<Theme, {}> = theme => ({});
 
 interface Props extends WithStyles<typeof styles> {
   regionContext: { region: number };
 }
 
-class MapNameSinglePicker extends React.PureComponent<Props> {
-  public componentDidMount() {}
+class VehicleUsage extends React.PureComponent<Props> {
+  private static SEARCH_DELAY = 500; // ms
+
+  public componentDidMount(): void {
+    this.getVehicleUsageWithFilterSet();
+  }
 
   public componentDidUpdate(prevProps: Readonly<Props>): void {
     const {
       regionContext: { region },
     } = this.props;
-    if (prevProps.regionContext.region === region) return;
+    if (prevProps.regionContext.region === region) {
+      return;
+    }
+    console.log('update');
   }
 
+  private getVehicleUsageWithFilterSet = throttle(async () => {
+    const response = await vehiclesApi.getVehicleUsage();
+    console.log(response);
+  }, VehicleUsage.SEARCH_DELAY);
+
   public render(): React.ReactElement {
-    return <div> hello world </div>;
+    return <div> hello world???? </div>;
   }
 }
 
-export default withRegion(withStyles(styles)(MapNameSinglePicker));
+export default withRegion(withStyles(styles)(VehicleUsage));
 """
     self.view.insert(edit, 0, code)
 
