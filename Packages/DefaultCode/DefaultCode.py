@@ -1,6 +1,13 @@
+import getpass
+import os
+import sys
+
 import sublime
 import sublime_plugin
 
+def read_file(floder_name, file_name):
+  username = getpass.getuser()
+  return open('/home/{}/.config/sublime-text-3/Packages/DefaultCode/{}/{}'.format(username, floder_name, file_name), 'r')
 
 class DefaultCodeCommand(sublime_plugin.TextCommand):
   def run(self, edit, args):
@@ -17,645 +24,117 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
         index += 1
 
 
-
     if suffix == "py":
       self.py_code(edit)
-      self.middle_ware(edit)
 
     elif suffix == "cpp" or suffix == "cc":
       self.cpp_code(edit)
-      self.middle_ware(edit)
 
     elif suffix == "js":
       self.js_code(edit)
-      self.middle_ware(edit)
 
     elif suffix == "go":
       self.go_code(edit)
-      self.middle_ware(edit)
 
     elif suffix == "html":
       self.html_code(edit)
-      self.middle_ware(edit)
 
     elif suffix == "sh":
       self.shell_code(edit)
-      self.middle_ware(edit)
 
     elif suffix == "yaml" or suffix == "yml":
       self.yaml_code(edit)
-      self.middle_ware(edit)
 
     elif suffix == "h":
       self.header_file_code(edit)
-      self.middle_ware(edit)
 
     elif suffix == "proto":
       self.proto_code(edit)
-      self.middle_ware(edit)
 
     elif suffix == "dockerfile" or suffix == "Dockerfile":
       self.dockerfile_code(edit)
-      self.middle_ware(edit)
 
     elif suffix == "env":
       self.env_code(edit)
-      self.middle_ware(edit)
     elif suffix == "tsx":
       self.tsx_code(edit)
     else: # 这个是makefile
       self.error_code(edit)
-      self.middle_ware(edit)
 
   def tsx_code(self, edit):
-    code = """import React from 'react';
-import { withStyles, StyleRulesCallback, WithStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import { throttle } from 'lodash';
-
-import Paper from '@material-ui/core/Paper';
-import TableWrapper from 'OperatorManagement/table';
-import vehiclesApi from 'common/api/vehiclesApi';
-import { withRegion } from 'common/RegionContext';
-
-const styles: StyleRulesCallback<Theme, {}> = () => ({
-  container: {
-    height: '100%',
-    flexGrow: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-  },
-  root: {
-    flexGrow: 1,
-    margin: 'auto',
-    width: '100%',
-    height: 'calc(100% - 0px)',
-  },
-  dataTable: {
-    width: '100%',
-    height: '100%',
-    overflow: 'auto',
-    position: 'absolute',
-  },
-});
-
-interface Props extends WithStyles<typeof styles> {
-  regionContext: { region: number };
-}
-
-class VehicleUsage extends React.PureComponent<Props> {
-  private static SEARCH_DELAY = 500; // ms
-
-  public componentDidMount(): void {
-    this.getVehicleUsageWithFilterSet();
-  }
-
-  public componentDidUpdate(prevProps: Readonly<Props>): void {
-    const {
-      regionContext: { region },
-    } = this.props;
-    if (prevProps.regionContext.region === region) {
-      return;
-    }
-    console.log('update');
-  }
-
-  private getVehicleUsageWithFilterSet = throttle(async () => {
-    const response = await vehiclesApi.getVehicleUsage();
-    console.log(response);
-  }, VehicleUsage.SEARCH_DELAY);
-
-  public render(): React.ReactElement {
-    const { classes } = this.props;
-    return (
-      <div className={classes.container}>
-        <Paper className={classes.root}>
-          <Typography style={{margin: 'auto', position: 'relative', flexGrow: 1, height: 'calc(100% - 54px)', width: '100%'}}>
-            <Typography component="div" className={classes.dataTable}>
-              <TableWrapper
-                displayRows={[]}
-                onChangePage={() => {}}
-                onChangeRowsPerPage={() => {}}
-                originRows={[]}
-                page={0}
-                rowsPerPage={10}
-                titles={(() => {
-                  const idd = [];
-                  for (let idx = 0; idx < 26; idx++) {
-                    idd.push('weimingliu');
-                  }
-                  return idd;
-                })()}
-                totalCount={30}
-              />
-            </Typography>
-          </Typography>
-        </Paper>
-      </div>
-    );
-  }
-}
-
-export default withRegion(withStyles(styles)(VehicleUsage));
-"""
+    code = 'can not read'
+    with read_file('html', 'pure-component.tsx') as fp:
+      code = fp.read()
     self.view.insert(edit, 0, code)
 
   def env_code(self, edit):
-    code = """MYSQL_ROOT_PASSWORD=root
-MYSQL_DATABASE=homework
-DB_HOST=db
-Telegram_Token=your token
-Redis_Host=redis:6379
-HTTP_PROXY=socks5://sslocal:1080
-HTTPS_PROXY=socks5://sslocal:1080
-"""
+    code = 'can not read'
+    with read_file('env', 'env.env') as fp:
+      code = fp.read()
     self.view.insert(edit, 0, code)
+
   def dockerfile_code(self, edit):
-    code = """FROM python:3
-
-ARG WORKSPACE="/python3/homepage-server"
-COPY . ${WORKSPACE}
-
-WORKDIR ${WORKSPACE}/docker
-RUN pip install --no-cache-dir -r ./requirements.txt
-
-WORKDIR ${WORKSPACE}
-
-CMD ["python3", "app.py"]
-# must use ./main
-
-"""
+    code = 'can not read'
+    with read_file('docker', 'server.dockerfile') as fp:
+      code = fp.read()
     self.view.insert(edit, 0, code)
-
-  def middle_ware(self, edit):
-    code = """// Copyright @2018 Pony AI Inc. All rights reserved.
-// Authors: weimingliu@pony.ai (Liu weiming)
-
-"""
-    code = ""
-    self.view.insert(edit, 0, code)
-
 
   def proto_code(self, edit):
-    code = """// See README.txt for information and build instructions.
-
-package tutorial;
-
-option java_package = "com.example.tutorial";
-option java_outer_classname = "AddressBookProtos";
-
-message Person {
-  required string name = 1;
-  required int32 id = 2;        // Unique ID number for this person.
-  optional string email = 3;
-
-  enum PhoneType {
-    MOBILE = 0;
-    HOME = 1;
-    WORK = 2;
-  }
-
-  message PhoneNumber {
-    required string number = 1;
-    optional PhoneType type = 2 [default = HOME];
-  }
-
-  repeated PhoneNumber phone = 4;
-}
-
-// Our address book file is just one of these.
-message AddressBook {
-  repeated Person person = 1;
-}
-"""
+    code = 'can not read'
+    with read_file('proto', 'official-demo.proto') as fp:
+      code = fp.read()
     self.view.insert(edit, 0, code)
+
   def header_file_code(self, edit):
-    code = """// We use this preprocessor directive to cause the current source file to be included only once
-// in a single compilation.
-#pragma once
-#include "common/experimental/weimingliu/codelab/cpp/josephus.pb.h"
-
-int SolveJosephusProblem(int n, int k);
-
-// Please implement this function add unit test for it
-const ::interface::experimental::weimingliu::Person SolveJosephusProblem(
-    interface::experimental::weimingliu::JosephusProblem);"""
+    code = 'can not read'
+    with read_file('cpp', 'header.h') as fp:
+      code = fp.read()
     self.view.insert(edit, 0, code)
 
   def yaml_code(self, edit):
-    code = """version: '3'
-services:
-  homepage_server:
-    build:
-      context: ..
-      dockerfile: docker/server.dockerfile
-    volumes:
-      - ${PWD}/../volumes/log:/log
-      - ${PWD}/../volumes/tmp:/tmp
-    environment:
-      - MYSQL_DB_HOST=${DB_HOST}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-    ports:
-      - "1121:1121"
-    restart: always
-    container_name: "homepage_server"
-    depends_on:
-      - homepage_db
-
-  homepage_db:
-    image: mysql:5.7
-    volumes:
-      - mysql_data:/var/lib/mysql
-    ports:
-      - "127.0.0.1:1120:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
-    restart: always
-    container_name: "homepage_db"
-
-  homepage_restore:
-    image: mysql:5.7
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - DB_HOST=${DB_HOST}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-    volumes:
-      - ../db:/db
-      - ../shell:/shell
-    depends_on:
-      - homepage_db
-    links:
-      - homepage_db
-    command: "./shell/deploy.sh restore"
-    container_name: "homepage_restore"
-
-  nginx:
-    image: nginx:latest
-    ports:
-        - "80:80"
-    environment:
-      - LANG=en_US.UTF-8
-      - LANGUAGE=en_US:en
-      - LC_ALL=en_US.UTF-8
-    volumes:
-      # 映射主机./conf.d目录到容器/etc/nginx/conf.d目录
-      - "$PWD/nginx.conf:/etc/nginx/conf.d/default.conf"
-      - "/root/show/:/show"
-    restart: always
-    container_name: "nginx"
-
-volumes:
-  mysql_data:
-"""
+    code = 'can not read'
+    with read_file('docker', 'web-service.yaml') as fp:
+      code = fp.read()
     self.view.insert(edit, 0, code)
 
-
   def shell_code(self, edit):
-    code = """#!/bin/bash
-container_name=(homepage_server homepage_db homepage_restore)
-server_address=95.163.202.160
-project_name="homepage-server"
-
-function deploy() {
-  stopRemote
-
-  echo "===================================>"
-  #  rsync的desc会自动创建一个目录，所以这样就是/root/${project_name}
-  echo "deploy....."
-  echo "maybe a little bit slow because will push this file to your-server"
-  rsync -avz --delete ../${project_name} root@${server_address}:/root
-
-  cmd="cd ${project_name}/docker;"
-  for data in ${container_name[@]}
-  do
-      cmd=${cmd}"docker-compose up --build -d ${data};"
-  done
-  echo ${cmd}
-  ssh root@${server_address} ${cmd}
-}
-
-function getRemote() {
-  echo "getting....."
-  rsync -avz --delete root@${server_address}:/root/${project_name} ../
-}
-
-function stopRemote() {
-  echo "stop....."
-  cmd=""
-  for data in ${container_name[@]}
-  do
-      cmd=${cmd}"docker rm -f ${data} || true;"
-  done
-  echo ${cmd}
-  ssh root@${server_address} ${cmd}
-}
-
-function logRemote() {
-  echo "docker logs -f ${container_name[0]}......"
-  ssh root@${server_address} "docker logs -f ${container_name[0]}"
-}
-
-#get remote database sql to local
-function dump() {
-  mysqldump -h${DB_HOST} -u$root -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} > ./db/sql/latest_dump.sql
-}
-
-function restore() {
-  second=10
-  echo "sleep ${second} seconds to wait db start"
-  sleep ${second}
-  echo "mysql -h${DB_HOST} -uroot -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} < ./db/sql/latest_dump.sql"
-  mysql -h${DB_HOST} -uroot -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} < ./db/sql/latest_dump.sql
-}
-
-function updateServer() {
-  rsync -avz ../${project_name} root@${server_address}:/root
-  echo "-------------------------------->"
-  echo "update remove server....."
-  cmd="cd ${project_name}/docker;"
-  cmd=${cmd}"docker rm -f ${container_name[0]};"
-  cmd=${cmd}"docker-compose up --build -d ${container_name[0]};"
-  echo ${cmd}
-  ssh root@${server_address} ${cmd}
-}
-
-case "$1" in
-  deploy)
-    deploy
-    ;;
-
-  stopRemote)
-    stopRemote
-    ;;
-
-  getRemote)
-    getRemote
-    ;;
-
-  logRemote)
-    logRemote
-    ;;
-
-  dump)
-    dump
-    ;;
-
-  restore)
-    restore
-    ;;
-
-  updateServer)
-    updateServer
-    ;;
-  *)
-    echo "please choose one {dump | restore}"
-    exit 1
-esac
-"""
+    code = 'can not read'
+    with read_file('shell', 'deploy.sh') as fp:
+      code = fp.read()
     self.view.insert(edit, 0, code)
 
   def html_code(self, edit):
-    code = '''<!DOCTYPE html>
-<html lang = "en">
-  <head>
-    <meta charset = "utf-8">
-      <title>
-          <!-- set title here -->
-      </title>
-    </meta>
-    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
-    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
-    <!-- 这个下载下来很慢，不会在实际上这样用，需要用静态文件。 -->
-    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
-  </head>
-
-  <script src = "main.js">
-      // 1、逻辑可以写在js，并且在js调用。
-      // 2、也可以在这里写，然后调用。这里调用不了main.js的内容
-  </script>
-
-  <body>
-    <form action="http://127.0.0.1:8080" method="post">
-      <p>First name: <input type="text" name="fname" /></p>
-      <p>Last name: <input type="text" name="lname" /></p>
-      <input type="submit" value="Submit" />
-    </form>
-  </body>
-
-  <body>
-    <form id="test-form" action="http://127.0.0.1:8080" method="post" onsubmit="return checkForm()">
-      <p>First name: <input type="text" name="fname" /></p>
-      <p>Last name: <input type="text" name="lname" /></p>
-      <input type="submit" value="Submit" />
-    </form>
-
-    <script>
-      function checkForm() {
-        var form = document.getElementById('test-form');
-        // 可以在此修改form的input...
-        // 继续下一步:
-        form.submit();
-        return true;
-      }
-    </script>
-  </body>
-</html>'''
+    code = 'can not read'
+    with read_file('html', 'html.html') as fp:
+      code = fp.read()
     self.view.insert(edit, 0, code)
 
   def py_code(self, edit):
-    code = '''#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-import json
-
-# 根据文档确定的返回消息
-class resp(object):
-	def __init__(self, success, error, data):
-		self.success = success  # bollean
-		self.error = error	    # string
-		self.data = data        # interface
-
-def work():
-	resp_obj = resp(True, False, [1, 2, 3, 4, "a list"])
-	return json.dumps(resp_obj, default = lambda obj: obj.__dict__, sort_keys=True, indent=4)
-
-if __name__ == '__main__':
-	json_value = work()
-	print(json_value)'''
+    code = 'can not read'
+    with read_file('py', 'default_class.py') as fp:
+      code = fp.read()
     self.view.insert(edit, 0, code)
 
   def cpp_code(self, edit):
-    code = """#include <bits/stdc++.h>
-using namespace std;
-
-#define inf (0x3f3f3f3f)
-typedef long long int LL;
-
-void work() {
-  
-}
-
-
-int main(int argc, char *argv[]) {
-  freopen("data.txt", "r", stdin);
-  work();
-  return 0;
-}
-"""
+    code = 'can not read'
+    with read_file('cpp', 'acm.cpp') as fp:
+      code = fp.read()
     self.view.insert(edit, 0, code)
 
   def go_code(self, edit):
-    code = '''package main
-
-import (
-  "fmt"
-  "io"
-  "io/ioutil"
-  "log"
-  "net/http"
-  "os"
-)
-
-const (
-  rootPage = `
-  <!doctype html>
-  <html>
-  <body>
-  <form action='/saveImage' method='post' enctype='multipart/form-data'>
-     <input type='file' name='vimi_image'>
-     <input type='submit' value='Upload'>
-  </form>
-  `
-  savePath = `./img/`
-)
-
-func inWhereAndThenShowCookies(name string, r *http.Request) {
-  fmt.Println(name)
-  for k, v := range r.Cookies() {
-    fmt.Println(k, v)
-  }
-  fmt.Println("---->\\n")
-}
-
-func root(w http.ResponseWriter, r *http.Request) {
-  inWhereAndThenShowCookies("in root", r)
-  w.Header().Add("Access-Control-Allow-Origin", "*") //设置跨域
-  r.ParseForm()                                      //解析参数，默认是不会解析的
-  fmt.Fprintf(w, rootPage)                           //这个写入到w的是输出到客户端的
-}
-
-func saveImage(w http.ResponseWriter, r *http.Request) {
-  inWhereAndThenShowCookies("in saveImage", r)
-  fmt.Println("in saveImage")
-  r.ParseForm()
-  uploadFile, handle, err := r.FormFile("vimi_image")
-  if err != nil {
-    log.Println(err)
-    return
-  }
-  os.Mkdir(savePath, 0777)
-  saveFile, err := os.OpenFile(savePath+handle.Filename, os.O_WRONLY|os.O_CREATE, 0666)
-  if err != nil {
-    log.Println(err)
-    return
-  }
-  io.Copy(saveFile, uploadFile)
-  defer uploadFile.Close()
-  defer saveFile.Close()
-
-  // must set it to response, and use in next request
-  // http.SetCookie(w, &http.Cookie{
-  //  Name:    "fileName",
-  //  Value:   handle.Filename,
-  //  Expires: time.Now().Add(24 * time.Second),
-  // })
-  http.Redirect(w, r, "/showImage?fileName="+handle.Filename, http.StatusFound)
-}
-
-func showImage(w http.ResponseWriter, r *http.Request) {
-  inWhereAndThenShowCookies("in showImage", r)
-  r.ParseForm()
-  fileName := r.URL.Query().Get("fileName")
-  file, err := os.Open(savePath + fileName)
-  if err != nil {
-    log.Println(err)
-    return
-  }
-  defer file.Close()
-  buff, err := ioutil.ReadAll(file)
-  if err != nil {
-    log.Println(err)
-    return
-  }
-  w.Write(buff)
-}
-
-func main() {
-  http.HandleFunc("/", root)               //设置访问的路由
-  http.HandleFunc("/saveImage", saveImage) //设置访问的路由
-  http.HandleFunc("/showImage", showImage) //设置访问的路由
-  err := http.ListenAndServe(":8080", nil) //设置监听的端口
-  if err != nil {
-    log.Fatal("ListenAndServe: ", err)
-  }
-}
-'''
+    code = 'can not read'
+    with read_file('go', 'web-img-service.go') as fp:
+      code = fp.read()
     self.view.insert(edit, 0, code)
 
   def js_code(self, edit):
-    code = """'use strict'
-var url = 'http://95.163.202.160:8080';
-const getJSON = function(url) {
-  const promise = new Promise(function(resolve, reject) {
-    var request = new XMLHttpRequest(); // 新建Microsoft.XMLHTTP对象
-      request.onreadystatechange = function() { // 状态发生变化时，函数被回调
-        if (request.readyState === 4) { // 成功完成
-          // 判断响应结果:
-          if (request.status === 200) {
-              // 成功，通过responseText拿到响应的文本:
-              resolve(request.responseText);
-          } else {
-              // 失败，根据响应码判断失败原因:
-              reject(request.status);
-          }
-        } else {
-            // HTTP请求还在继续...
-        }
-      }
-      // 发送请求:
-      request.open('GET', url);
-      request.send();
-    });
-
-  return promise;
-};
-
-getJSON(url).then(function(json) {
-  alert('Contents: ' + json);
-}, function(error) {
-  alert('出错了', error);
-});
-
-alert("还是先输出这个，所以不是从上到下的。");"""
+    code = 'can not read'
+    with read_file('html', 'ajax.js') as fp:
+      code = fp.read()
     self.view.insert(edit, 0, code)
 
   def error_code(self, edit):
-    code = """.PHONY: homepage-server
-
-deploy:
-  @./shell/deploy.sh deploy
-
-stopRemote:
-  @./shell/deploy.sh stopRemote
-
-logRemote:
-  @./shell/deploy.sh logRemote
-
-getRemote:
-  @./shell/deploy.sh getRemote
-"""
+    code = 'can not read'
+    with read_file('makefile', 'Makefile') as fp:
+      code = fp.read()
     self.view.insert(edit, 0, code)
