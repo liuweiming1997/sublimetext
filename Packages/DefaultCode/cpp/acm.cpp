@@ -8,7 +8,6 @@ void work() {
   
 }
 
-
 int main(int argc, char *argv[]) {
   freopen("data.txt", "r", stdin);
   work();

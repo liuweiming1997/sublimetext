@@ -14,7 +14,30 @@ def read_file(floder_name, file_name):
     sublime.error_message('no such file {}/{}'.format(floder_name, file_name))
     return None
 
+def prepare_files(floder_name):
+  username = getpass.getuser()
+  path = '/home/{}/.config/sublime-text-3/Packages/DefaultCode/{}/'.format(username, floder_name)
+  result = []
+  for parent, dirnames, filenames in os.walk(path, followlinks=True):
+    for filename in filenames:
+      result.append((os.path.join(parent, filename))[len(path):])
+  return result
+
 class DefaultCodeCommand(sublime_plugin.TextCommand):
+  def write(self, fp, edit):
+    content = fp.read() or 'having no content in {}'.format(fp.name)
+    print(content)
+    sublime.set_clipboard(content)
+    return
+    self.view.run_command("insert", {"characters": content})
+
+  def showing(self, floder_name, edit):
+    all_files = prepare_files(floder_name)
+    self.view.window().show_quick_panel(
+      all_files,
+      lambda x: self.write(read_file(floder_name, all_files[x]), edit)
+    )
+
   def run(self, edit, args):
     name = self.view.file_name()
     suffix = ""
@@ -66,79 +89,40 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
       self.error_code(edit)
 
   def tsx_code(self, edit):
-    code = 'can not read'
-    with read_file('html', 'pure-component.tsx') as fp:
-      code = fp.read()
-    self.view.insert(edit, 0, code)
+    self.showing('html', edit)
 
   def env_code(self, edit):
-    code = 'can not read'
-    with read_file('env', 'env.env') as fp:
-      code = fp.read()
-    self.view.insert(edit, 0, code)
+    self.showing('env', edit)
 
   def dockerfile_code(self, edit):
-    code = 'can not read'
-    with read_file('docker', 'server.dockerfile') as fp:
-      code = fp.read()
-    self.view.insert(edit, 0, code)
+    self.showing('docker', edit)
 
   def proto_code(self, edit):
-    code = 'can not read'
-    with read_file('proto', 'official-demo.proto') as fp:
-      code = fp.read()
-    self.view.insert(edit, 0, code)
+    self.showing('proto', edit)
 
   def header_file_code(self, edit):
-    code = 'can not read'
-    with read_file('cpp', 'header.h') as fp:
-      code = fp.read()
-    self.view.insert(edit, 0, code)
+    self.showing('cpp', edit)
 
   def yaml_code(self, edit):
-    code = 'can not read'
-    with read_file('docker', 'web-service.yaml') as fp:
-      code = fp.read()
-    self.view.insert(edit, 0, code)
+    self.showing('docker', edit)
 
   def shell_code(self, edit):
-    code = 'can not read'
-    with read_file('shell', 'deploy.sh') as fp:
-      code = fp.read()
-    self.view.insert(edit, 0, code)
+    self.showing('shell', edit)
 
   def html_code(self, edit):
-    code = 'can not read'
-    with read_file('html', 'html.html') as fp:
-      code = fp.read()
-    self.view.insert(edit, 0, code)
+    self.showing('html', edit)
 
   def py_code(self, edit):
-    code = 'can not read'
-    with read_file('py', 'default_class.py') as fp:
-      code = fp.read()
-    self.view.insert(edit, 0, code)
+    self.showing('py', edit)
 
   def cpp_code(self, edit):
-    code = 'can not read'
-    with read_file('cpp', 'acm.cpp') as fp:
-      code = fp.read()
-    self.view.insert(edit, 0, code)
+    self.showing('cpp', edit)
 
   def go_code(self, edit):
-    code = 'can not read'
-    with read_file('go', 'web-img-service.go') as fp:
-      code = fp.read()
-    self.view.insert(edit, 0, code)
+    self.showing('go', edit)
 
   def js_code(self, edit):
-    code = 'can not read'
-    with read_file('html', 'ajax.js') as fp:
-      code = fp.read()
-    self.view.insert(edit, 0, code)
+    self.showing('html', edit)
 
   def error_code(self, edit):
-    code = 'can not read'
-    with read_file('makefile', 'Makefile') as fp:
-      code = fp.read()
-    self.view.insert(edit, 0, code)
+    self.showing('makefile', edit)
