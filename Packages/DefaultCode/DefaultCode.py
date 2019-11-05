@@ -7,7 +7,12 @@ import sublime_plugin
 
 def read_file(floder_name, file_name):
   username = getpass.getuser()
-  return open('/home/{}/.config/sublime-text-3/Packages/DefaultCode/{}/{}'.format(username, floder_name, file_name), 'r')
+  try:
+    return open('/home/{}/.config/sublime-text-3/Packages/DefaultCode/{}/{}'.format(username, floder_name, file_name), 'r')
+  except Exception as e:
+    print(e)
+    sublime.error_message('no such file {}/{}'.format(floder_name, file_name))
+    return None
 
 class DefaultCodeCommand(sublime_plugin.TextCommand):
   def run(self, edit, args):
@@ -22,7 +27,6 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
       while index < len(name):
         suffix += name[index]
         index += 1
-
 
     if suffix == "py":
       self.py_code(edit)
