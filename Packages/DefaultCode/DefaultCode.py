@@ -28,14 +28,13 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
     content = fp.read() or 'having no content in {}'.format(fp.name)
     print(content)
     sublime.set_clipboard(content)
-    return
-    self.view.run_command("insert", {"characters": content})
+    self.view.run_command("paste_and_indent", {"characters": content})
 
   def showing(self, floder_name, edit):
     all_files = prepare_files(floder_name)
     self.view.window().show_quick_panel(
       all_files,
-      lambda x: self.write(read_file(floder_name, all_files[x]), edit)
+      lambda x: self.write(read_file(floder_name, all_files[x]) if x != -1 else None, edit)
     )
 
   def run(self, edit, args):
