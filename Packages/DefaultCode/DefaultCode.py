@@ -82,7 +82,7 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
 
     elif suffix == "env":
       self.env_code(edit)
-    elif suffix == "tsx":
+    elif suffix == "tsx" or suffix == "ts":
       self.tsx_code(edit)
     else: # 这个是makefile
       self.error_code(edit)
