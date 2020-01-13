@@ -74,9 +74,6 @@
     // 重新build c-tags
     { "keys": ["ctrl+q"], "command":"rebuild_tags"},
 
-    // 自己写的一个defaultcode
-    {"keys": ["ctrl+m"], "command":"default_code", "args":{"args": "cpp"} },
-
     { "keys": ["ctrl+shift+pageup"], "command": "next_view_in_stack" },
     { "keys": ["ctrl+shift+pagedown"], "command": "prev_view_in_stack" },
 
@@ -122,6 +119,12 @@
 
     // sort import
     { "keys": ["ctrl+\\"], "command": "sort_import" },
+
+    // 自己写的一个defaultcode
+    {"keys": ["ctrl+m"], "command":"default_code", "args":{"args": "cpp"} },
+
+    // format tool
+    { "keys": ["ctrl+\/"], "command": "format_tool" },
 
     // delete word
     { "keys": ["alt+backspace"], "command": "delete_word", "args": { "forward": false } },
