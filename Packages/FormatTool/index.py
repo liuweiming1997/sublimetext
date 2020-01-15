@@ -28,7 +28,6 @@ class FormatToolCommand(sublime_plugin.TextCommand):
     tot_str = self.view.substr(region)
     
     if suffix == 'py':
-        result = py_yapf(tot_str)
-        print(result)
+        result = py_yapf(1, 10, '/home/vimi/aaaavimidatafile/test/python/main.py')
     else:
         self.view.show_popup('Unsupport format file type')
