@@ -1,4 +1,5 @@
 // See README.txt for information and build instructions.
+syntax = "proto2";
 
 package tutorial;
 
@@ -13,7 +14,8 @@ message Person {
   enum PhoneType {
     MOBILE = 0;
     HOME = 1;
-    WORK = 2;
+    WORK = 2 [deprecated=true];
+    // reserved LIME, 3
   }
 
   message PhoneNumber {
