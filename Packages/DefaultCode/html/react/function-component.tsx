@@ -1,19 +1,18 @@
 import React from 'react';
-import { withStyles, StyleRulesCallback, Theme, WithStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-const styles: StyleRulesCallback<Theme, {}> = () => ({
-  root: {},
-});
+const useStyles = makeStyles(theme => ({
+}));
 
-interface Props extends WithStyles<typeof styles> {}
+interface Props {}
 
-const Warpper: React.FunctionComponent<Props> = ({
-  classes,
-}) => (
-  <div>
-    hello world
-  </div>
-);
+const Warpper: React.FunctionComponent<Props> = ({}) => {
+  const classes = useStyles({});
+  return (
+    <div>
+      hello world
+    </div>
+  )
+};
 
-export default withStyles(styles)(Warpper);
-
+export default Warpper;
