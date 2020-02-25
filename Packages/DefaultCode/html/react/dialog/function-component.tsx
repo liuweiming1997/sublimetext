@@ -6,23 +6,24 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Divider from '@material-ui/core/Divider';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
-import { withStyles, StyleRulesCallback, Theme, WithStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-const styles: StyleRulesCallback<Theme, {}> = () => ({
+const useStyles = makeStyles(theme => ({
   root: {
     height: 720,
     width: 600,
     backgroundColor: '#FFFFFF',
     boxShadow: '0 4px 10px 0 rgba(147,149,153,0.6)',
   },
-});
+}));
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   onClose: () => void;
   onConfirm: () => void;
 }
 
-const AddTagDialog: React.FunctionComponent<Props> = ({ classes, onClose, onConfirm }) => {
+const ClearShiftDialog: React.FunctionComponent<Props> = ({onClose, onConfirm }) => {
+  const classes = useStyles({});
   return (
     <Dialog open classes={{ paper: classes.root }} maxWidth="md" onClose={onClose}>
       <MuiDialogTitle disableTypography>
@@ -42,4 +43,4 @@ const AddTagDialog: React.FunctionComponent<Props> = ({ classes, onClose, onConf
   );
 };
 
-export default withStyles(styles)(AddTagDialog);
+export default ClearShiftDialog;
