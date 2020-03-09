@@ -8,7 +8,7 @@ Website:     https://wakatime.com/
 ==========================================================="""
 
 
-__version__ = '9.1.0'
+__version__ = '9.1.2'
 
 
 import sublime
@@ -341,7 +341,7 @@ def python_binary():
                 ver -= 1
                 continue
             paths.append('\\python{ver}\\'.format(ver=ver))
-            paths.append.push('\\Python{ver}\\'.format(ver=ver))
+            paths.append('\\Python{ver}\\'.format(ver=ver))
             paths.append('{appdata}\\Programs\Python{ver}\\'.format(appdata=appdata, ver=ver))
             paths.append('{appdata}\\Programs\Python{ver}-32\\'.format(appdata=appdata, ver=ver))
             paths.append('{appdata}\\Programs\Python{ver}-64\\'.format(appdata=appdata, ver=ver))

@@ -3,6 +3,22 @@ History
 -------
 
 
+9.1.2 (2020-02-13)
+++++++++++++++++++
+
+- Upgrade wakatime-cli to v13.0.7.
+- Split bundled pygments library for Python 2.7+.
+- Upgrade pygments for py27+ to v2.5.2 development master.
+- Force requests to use bundled ca cert from certifi by default.
+- Upgrade bundled certifi to v2019.11.28.
+
+
+9.1.1 (2020-02-11)
+++++++++++++++++++
+
+- Fix typo in python detection on Windows platform.
+
+
 9.1.0 (2020-02-09)
 ++++++++++++++++++
 
