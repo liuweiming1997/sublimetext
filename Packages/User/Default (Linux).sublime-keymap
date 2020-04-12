@@ -126,6 +126,16 @@
     // format tool
     { "keys": ["ctrl+\/"], "command": "format_tool" },
 
+    // copy tool
+    { "keys": ["ctrl+c"], "command": "copy_tool", "args": {"origin_command": "copy"}},
+
+    { "keys": ["ctrl+x"], "command": "copy_tool", "args": {"origin_command": "cut"}},
+
+    { "keys": ["ctrl+0"], "command": "copy_tool", "args": {"to_show": true}},
+    { "keys": ["ctrl+9"], "command": "copy_tool", "args": {"to_show": true}},
+
+    // end copy tool
+
     // delete word
     { "keys": ["alt+backspace"], "command": "delete_word", "args": { "forward": false } },
 ]
