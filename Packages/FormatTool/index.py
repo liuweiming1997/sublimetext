@@ -29,5 +29,6 @@ class FormatToolCommand(sublime_plugin.TextCommand):
     
     if suffix == 'py':
         result = py_yapf(1, 10, '/home/vimi/aaaavimidatafile/test/python/main.py')
+        print(result)
     else:
         self.view.show_popup('Unsupport format file type')
