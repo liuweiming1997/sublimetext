@@ -12,7 +12,8 @@ class CopyToolCommand(sublime_plugin.TextCommand):
     copyed_queue = []
 
     def run(self, edit, origin_command=None, to_show=None):
-        file_name = os.path.basename(self.view.file_name())
+        file_name = self.view.file_name() or "empyt_file_name"
+        file_name = os.path.basename(file_name)
         if origin_command:
             self.view.run_command(origin_command)
         if to_show:
