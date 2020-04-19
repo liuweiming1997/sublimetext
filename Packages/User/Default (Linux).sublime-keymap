@@ -120,6 +120,9 @@
     // sort import
     { "keys": ["ctrl+\\"], "command": "sort_import" },
 
+    // snake & camel
+    { "keys": ["ctrl+shift+\\"], "command": "snake_case_and_camel_case" },
+
     // 自己写的一个defaultcode
     {"keys": ["ctrl+m"], "command":"default_code", "args":{"args": "cpp"} },
 
