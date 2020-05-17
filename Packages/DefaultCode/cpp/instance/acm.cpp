@@ -9,7 +9,10 @@ void work() {
 }
 
 int main(int argc, char *argv[]) {
-  freopen("data.txt", "r", stdin);
+  char* is_for_oj = getenv("is_for_oj");
+  if (is_for_oj != NULL) {
+    freopen("data.txt", "r", stdin);
+  }
   work();
   return 0;
 }
