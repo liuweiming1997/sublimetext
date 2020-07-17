@@ -1,0 +1,8 @@
+binaries/*
+!binaries/2.8.2
+
+**.DS_Store
+
+registration_key
+sig
+auth
