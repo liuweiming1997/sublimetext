@@ -8,15 +8,21 @@ import sublime_plugin
 def read_file(floder_name, file_name):
   username = getpass.getuser()
   try:
-    return open('/home/{}/.config/sublime-text-3/Packages/DefaultCode/{}/{}'.format(username, floder_name, file_name), 'r')
+    if floder_name:
+      return open('/home/{}/.config/sublime-text-3/Packages/DefaultCode/{}/{}'.format(username, floder_name, file_name), 'r')
+    else:
+      return open('/home/{}/.config/sublime-text-3/Packages/DefaultCode/{}'.format(username, file_name), 'r')
   except Exception as e:
     print(e)
     sublime.error_message('no such file {}/{}'.format(floder_name, file_name))
     return None
 
-def prepare_files(floder_name):
+def prepare_files(floder_name=''):
   username = getpass.getuser()
-  path = '/home/{}/.config/sublime-text-3/Packages/DefaultCode/{}/'.format(username, floder_name)
+  if floder_name:
+    path = '/home/{}/.config/sublime-text-3/Packages/DefaultCode/{}/'.format(username, floder_name)
+  else:
+    path = '/home/{}/.config/sublime-text-3/Packages/DefaultCode/'.format(username)
   result = []
   for parent, dirnames, filenames in os.walk(path, followlinks=True):
     for filename in filenames:
@@ -37,10 +43,17 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
       lambda x: self.write(read_file(floder_name, all_files[x]) if x != -1 else None, edit)
     )
 
+  def show_all(self, edit):
+    all_files = prepare_files()
+    self.view.window().show_quick_panel(
+      all_files,
+      lambda x: self.write(read_file(floder_name='', file_name=all_files[x]) if x != -1 else None, edit)
+    )
+
   def run(self, edit, args):
     name = self.view.file_name()
     suffix = ""
-    index = name.rfind(".")
+    index = name.rfind(".") if name else -1
 
     if index == -1:
       suffix = "error_suffix"
@@ -124,4 +137,4 @@ class DefaultCodeCommand(sublime_plugin.TextCommand):
     self.showing('html', edit)
 
   def error_code(self, edit):
-    self.showing('makefile', edit)
+    self.show_all(edit)
