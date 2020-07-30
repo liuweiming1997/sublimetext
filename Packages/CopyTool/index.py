@@ -7,7 +7,6 @@ import sublime_plugin
 
 MAX_SIZE = 10
 
-
 class CopyToolCommand(sublime_plugin.TextCommand):
     copyed_queue = []
 
@@ -24,20 +23,20 @@ class CopyToolCommand(sublime_plugin.TextCommand):
                 "value": copy_value,
                 "file_name": file_name,
             })
-            print(self.copyed_queue)
+            print(CopyToolCommand.copyed_queue)
 
     def put(self, value):
-        if len(self.copyed_queue) == MAX_SIZE:
-            self.copyed_queue = self.copyed_queue[1:]
-        self.copyed_queue.append(value)
+        if len(CopyToolCommand.copyed_queue) == MAX_SIZE:
+            CopyToolCommand.copyed_queue = CopyToolCommand.copyed_queue[1:]
+        CopyToolCommand.copyed_queue.append(value)
 
     def get_all(self):
-        return ["{}: {} -- {}".format(idx + 1, v["file_name"], v["value"].lstrip()[:80]) for idx, v in enumerate(reversed(self.copyed_queue))]
+        return ["{}: {} -- {}".format(idx + 1, v["file_name"], v["value"].lstrip()[:80]) for idx, v in enumerate(reversed(CopyToolCommand.copyed_queue))]
 
     def select_idx(self, idx):
         if idx == -1:
             return
-        content = self.copyed_queue[len(self.copyed_queue) - idx - 1]["value"]
+        content = CopyToolCommand.copyed_queue[len(CopyToolCommand.copyed_queue) - idx - 1]["value"]
         sublime.set_clipboard(content)
         self.view.run_command("paste_and_indent", {"characters": content})
 
