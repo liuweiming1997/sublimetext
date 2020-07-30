@@ -1,26 +1,33 @@
 import { Reducer } from 'redux';
 
-import { SchedulerState, SchedulerActionType, SchedulerAction } from './types';
+import { VmsSearchState, VmsSearchActionType, VmsSearchAction } from './types';
 
-const initialState: SchedulerState = {
-  shiftList: [],
-  isPublished: false,
+import { SearchResponse as SearchResponseProto } from 'common/proto/js_out/vehicle_manager/api_pb';
+
+const initialState: VmsSearchState = {
+  isSearching: false,
+  searchResponse: new SearchResponseProto(),
 };
 
-export const schedulerReducer: Reducer<SchedulerState, SchedulerAction> = (
+export const vmsSearchReducer: Reducer<VmsSearchState, VmsSearchAction> = (
   state = initialState,
   action,
 ) => {
   switch (action.type) {
-    case SchedulerActionType.FETCH_SHIFT_LIST_COMPLETE:
+    case VmsSearchActionType.SEARCH_START:
       return {
         ...state,
-        shiftList: action.shiftList,
-        isPublished: action.isPublished,
+        isSearching: true,
+      };
+    case VmsSearchActionType.SEARCH_COMPLETE:
+      return {
+        ...state,
+        isSearching: false,
+        searchResponse: action.searchResponse,
       };
     default:
       return state;
   }
 };
 
-export default { schedulerReducer };
+export default { vmsSearchReducer };

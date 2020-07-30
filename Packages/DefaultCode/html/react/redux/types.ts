@@ -1,21 +1,24 @@
 /* eslint-disable import/prefer-default-export */
 import { Action } from 'redux';
 
-import Shift from 'models/shiftScheduler/Shift';
+import { SearchResponse as SearchResponseProto } from 'common/proto/js_out/vehicle_manager/api_pb';
 
-export interface SchedulerState {
-  shiftList: Shift[];
-  isPublished: boolean;
+export interface VmsSearchState {
+  isSearching: boolean;
+  searchResponse: SearchResponseProto;
 }
 
-export enum SchedulerActionType {
-  FETCH_SHIFT_LIST_COMPLETE = 'SCHEDULER.FETCH_SHIFT_LIST_COMPLETE',
+export enum VmsSearchActionType {
+  SEARCH_START = 'VMSSEARCH.SEARCH_START',
+  SEARCH_COMPLETE = 'VMSSEARCH.SEARCH_COMPLETE',
 }
 
-interface FetchShiftListCompleteAction
-  extends Action<SchedulerActionType.FETCH_SHIFT_LIST_COMPLETE> {
-  shiftList: Shift[];
-  isPublished: boolean;
+interface SearchStartAction extends Action<VmsSearchActionType.SEARCH_START> {}
+
+interface SearchCompleteAction extends Action<VmsSearchActionType.SEARCH_COMPLETE> {
+  searchResponse: SearchResponseProto; 
 }
 
-export type SchedulerAction = FetchShiftListCompleteAction;
+export type VmsSearchAction =
+  | SearchStartAction
+  | SearchCompleteAction;

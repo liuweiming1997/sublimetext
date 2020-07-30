@@ -2,50 +2,31 @@
 import { ActionCreator } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
-import { SchedulerActionType, SchedulerAction } from './types';
+import { VmsSearchActionType, VmsSearchAction } from './types';
 
-import { Region, Office } from 'common/proto/js_out/framework/region_pb';
-import { TripType } from 'common/proto/js_out/vehicle_scheduler/enums_pb';
-import { ValueOf } from 'common/utils/types';
-import Shift from 'models/shiftScheduler/Shift';
-import shiftApi from 'common/api/shiftApi';
+import {
+  VmsApiRequest as VmsApiRequestProto,
+  SearchResponse as SearchResponseProto,
+} from 'common/proto/js_out/vehicle_manager/api_pb';
+import vehicleManagerApi from 'common/api/vehicleManagerApi';
 
-type SchedulerThunkAction = ThunkAction<Promise<void>, {}, void, SchedulerAction>;
-type SchedulerActionCreator = ActionCreator<SchedulerAction>;
+type VmsSearchThunkAction = ThunkAction<Promise<void>, {}, void, VmsSearchAction>;
+type VmsSearchActionCreator = ActionCreator<VmsSearchAction>;
 
-// Fetch ShiftList
-export const fetchShiftList = (
-  dateStr: string,
-  region: ValueOf<Region.RegionNameMap>,
-  office: ValueOf<Office.EnumMap>,
-  filterVehicleId?: number,
-  filterDriverId?: number,
-  filterCoDriverId?: number,
-  filterFollowCarDriverId?: number,
-  filterTypeOfUseage?: ValueOf<TripType.EnumMap>,
-): SchedulerThunkAction => async dispatch => {
-  const response = await shiftApi.getShifts(
-    dateStr,
-    region,
-    office,
-    filterVehicleId,
-    filterDriverId,
-    filterFollowCarDriverId,
-    filterTypeOfUseage,
-  );
-  if (!response) {
+export const doVmsSearch = (
+  searchRequest: VmsApiRequestProto,
+): VmsSearchThunkAction => async dispatch => {
+  dispatch({ type: VmsSearchActionType.SEARCH_START });
+  const vmsApiResponse = await vehicleManagerApi.doVmsSearch(searchRequest);
+  if (!vmsApiResponse) {
     dispatch({
-      type: SchedulerActionType.FETCH_SHIFT_LIST_COMPLETE,
-      shiftList: [],
-      isPublished: false,
+      type: VmsSearchActionType.SEARCH_COMPLETE,
+      searchResponse: new SearchResponseProto(),
     });
     return;
   }
-  const isPublished = response.getIsPublished() || false;
-  const shiftList = response.getShiftList().map(v => new Shift(v));
   dispatch({
-    type: SchedulerActionType.FETCH_SHIFT_LIST_COMPLETE,
-    shiftList,
-    isPublished,
+    type: VmsSearchActionType.SEARCH_COMPLETE,
+    searchResponse: vmsApiResponse.getSearchResponse() || new SearchResponseProto(),
   });
 };
