@@ -1,22 +1,22 @@
 import React from 'react';
-import { withStyles, StyleRulesCallback, Theme, WithStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
 import { SelectFilter } from 'common/component/filter';
 
-const styles: StyleRulesCallback<Theme, {}> = () => ({
+const useStyles = makeStyles(() => ({
   picker: {
     display: 'block',
     overflow: 'visible',
   },
-});
+}));
 
 interface Option<T> {
   label: string;
   value: T[keyof T];
 }
 
-interface Props<T extends {}> extends WithStyles<typeof styles> {
+interface Props<T extends {}> {
   label: string;
   shrinkLabel?: string;
   className?: string;
@@ -27,7 +27,6 @@ interface Props<T extends {}> extends WithStyles<typeof styles> {
 }
 
 function ProtobufEnumSinglePicker<T>({
-  classes,
   label,
   shrinkLabel,
   className,
@@ -36,6 +35,7 @@ function ProtobufEnumSinglePicker<T>({
   protobufEnum,
   renderer,
 }: Props<T>): React.ReactElement {
+  const classes = useStyles({});
   const enumOptions: Option<T>[] = Object.entries(protobufEnum).map(([key, value]) => {
     return {
       value,
@@ -65,6 +65,4 @@ function ProtobufEnumSinglePicker<T>({
   );
 }
 
-export default withStyles(styles)(ProtobufEnumSinglePicker) as <T>(
-  props: Omit<Props<T>, 'classes'>,
-) => JSX.Element;
+export default ProtobufEnumSinglePicker;
