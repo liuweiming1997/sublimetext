@@ -11,5 +11,9 @@
 file index: fuck you
   https://www.sublimetext.com/blog/articles/file-indexing
 
+try to fix the import rule in the plug
+pip3 install pyhumps==1.3.1 --user
+
+
 ### TODO:
 ### script file auto upload
