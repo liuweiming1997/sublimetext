@@ -14,6 +14,8 @@ file index: fuck you
 try to fix the import rule in the plug
 pip3 install pyhumps==1.3.1 --user
 
+for mac:
+git clone git@github.com:liuweiming1997/sublimetext.git '/Users/{}/Library/Application Support/Sublime Text'
 
 ### TODO:
 ### script file auto upload
