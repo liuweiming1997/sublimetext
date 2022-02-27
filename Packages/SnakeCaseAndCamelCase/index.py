@@ -7,6 +7,8 @@ import sublime_plugin
 
 sys.path.append('/home/{}/.local/lib/python3.5/site-packages'.format(getpass.getuser()))
 sys.path.append('/home/{}/.local/lib/python3.8/site-packages'.format(getpass.getuser()))
+sys.path.append('/usr/local/lib/python3.9/site-packages')
+
 try:
     import humps
 except Exception as e:

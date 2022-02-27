@@ -78,7 +78,7 @@
     { "keys": ["ctrl+shift+pagedown"], "command": "prev_view_in_stack" },
 
     { "keys": ["ctrl+u"], "command": "soft_undo" },
-    { "keys": ["ctrl+g", "ctrl+d"], "command": "find_under_expand_skip" },
+    // { "keys": ["ctrl+g", "ctrl+d"], "command": "find_under_expand_skip" },
 
     // Align-Tab
     {
