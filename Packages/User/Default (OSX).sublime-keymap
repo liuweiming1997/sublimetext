@@ -1,0 +1,144 @@
+[
+    //注释快捷键
+    { "keys": ["ctrl+shift+c"], "command": "toggle_comment", "args": { "block": false } },
+
+     //代码提示功能
+    { "keys": ["ctrl+space"], "command": "auto_complete" },
+    { "keys": ["ctrl+space"], "command": "replace_completion_with_auto_complete", "context":
+        [
+            { "key": "last_command", "operator": "equal", "operand": "insert_best_completion" },
+            { "key": "auto_complete_visible", "operator": "equal", "operand": false },
+            { "key": "setting.tab_completion", "operator": "equal", "operand": true }
+        ]
+    },
+
+    // The go program languange
+    // { "keys": ["ctrl+d"], "command": "godef" },
+
+    // 运行文件
+    { "keys": ["f9"], "command": "build" },
+
+    //代码格式化
+    { "keys": ["alt+f8"], "command": "reindent" },
+
+    //打开跳去指定行的操作
+   { "keys": ["ctrl+enter"], "command": "show_overlay", "args": {"overlay": "goto", "text": ":"} },
+
+   //
+   { "keys": ["ctrl+shift+t"], "command": "reopen_last_file" },
+   { "keys": ["ctrl+w"], "command": "close" },
+
+   /*Terminal plug*/
+    { "keys": ["ctrl+shift+o"], "command": "open_terminal_project_folder" },
+
+    { "command": "add_info", "keys": ["ctrl+shift+."] },
+
+
+    { "keys": ["ctrl+alt+i"], "command": "java_import_path" },
+
+    { "keys": ["ctrl+shift+r"], "command": "reveal_in_side_bar"},
+
+    { "keys": "tab", "command": "insert", "args": {"characters": "\t"} },
+
+    { "keys": ["f2"], "command": "rename_file", "args": { "paths": ["$file"] } },
+
+//************************************************************************************
+    /*ctags*/
+    // {"command": "navigate_to_definition", "keys": ["ctrl+k"]},
+    // {"command": "jump_back","keys": ["ctrl+j"]},
+
+    /* sublime self goto_define*/
+    { "keys": ["ctrl+i"], "command": "goto_definition" },
+    { "keys": ["ctrl+8"], "command": "goto_reference" },
+    /* sublime self */
+
+    { "keys": ["ctrl+k"], "command": "move", "args": {"by": "lines", "forward": false} },
+    { "keys": ["ctrl+j"], "command": "move", "args": {"by": "lines", "forward": true} },
+    // { "keys": ["ctrl+h"], "command": "move", "args": {"by": "characters", "forward": false} },
+    // { "keys": ["ctrl+l"], "command": "move", "args": {"by": "characters", "forward": true} },
+
+    { "keys": ["ctrl+h"], "command": "jump_back"},
+    { "keys": ["ctrl+l"], "command": "jump_forward"},
+
+//************************************************************************************
+
+    { "keys": ["ctrl+alt+i"], "command": "copy_path" },
+    { "keys": ["ctrl+alt+n"], "command": "side_bar_copy_name" },
+
+    //隐藏侧边栏
+    {"keys": ["f1"],"command": "toggle_side_bar"},
+
+    //在浏览器打开
+    { "keys": ["ctrl+o"], "command": "open_in_browser" },
+
+    // 重新build c-tags
+    { "keys": ["ctrl+q"], "command":"rebuild_tags"},
+
+    { "keys": ["ctrl+shift+pageup"], "command": "next_view_in_stack" },
+    { "keys": ["ctrl+shift+pagedown"], "command": "prev_view_in_stack" },
+
+    { "keys": ["ctrl+u"], "command": "soft_undo" },
+    { "keys": ["ctrl+g", "ctrl+d"], "command": "find_under_expand_skip" },
+
+    // Align-Tab
+    {
+      "keys": ["shift+ctrl+;"], "command": "align_tab",
+      "args" : {
+        "user_input" : ":/f"
+      }
+    },
+    {
+      "keys": ["shift+ctrl+="], "command": "align_tab",
+      "args" : {
+        "user_input" : "=/f"
+      }
+    },
+    {
+      "keys": ["shift+ctrl+-"], "command": "align_tab",
+      "args" : {
+        "user_input" : "=>/f"
+      }
+    },
+    // Align-Tab
+
+    // git-blame
+    {"keys": ["ctrl+,"], "command": "blame"},
+    { "keys": ["ctrl+left"], "command": "focus_group", "args": { "group": 0 } },
+    { "keys": ["ctrl+right"], "command": "focus_group", "args": { "group": 1 } },
+
+    { "keys": ["ctrl+shift+w"], "command": "close_other" },
+
+    { "keys": ["ctrl+shift+q"], "command": "exit" },
+
+    { "keys": ["ctrl+t"], "command": "new_file" },
+    { "keys": ["ctrl+up"], "command": "focus_side_bar" },
+    { "keys": ["ctrl+down"], "command": "focus_side_bar" },
+
+    // open url
+    { "keys": ["alt+enter"], "command": "open_url_under_cursor" },
+
+    // sort import
+    { "keys": ["ctrl+\\"], "command": "sort_import" },
+
+    // snake & camel
+    { "keys": ["ctrl+shift+\\"], "command": "snake_case_and_camel_case" },
+
+    // 自己写的一个defaultcode
+    {"keys": ["ctrl+m"], "command":"default_code", "args":{"args": "cpp"} },
+
+    // format tool
+    { "keys": ["ctrl+\/"], "command": "format_tool" },
+
+    // copy tool
+    { "keys": ["ctrl+c"], "command": "copy_tool", "args": {"origin_command": "copy"}},
+
+    { "keys": ["ctrl+x"], "command": "copy_tool", "args": {"origin_command": "cut"}},
+
+    { "keys": ["ctrl+0"], "command": "copy_tool", "args": {"to_show": true}},
+    { "keys": ["ctrl+9"], "command": "copy_tool", "args": {"to_show": true}},
+
+    // end copy tool
+
+    // delete word
+    { "keys": ["alt+backspace"], "command": "delete_word", "args": { "forward": false } },
+]
