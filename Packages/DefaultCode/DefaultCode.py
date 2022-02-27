@@ -5,13 +5,15 @@ import sys
 import sublime
 import sublime_plugin
 
+BASE_PATH = '{}/DefaultCode'.format(sublime.packages_path())
+
 def read_file(floder_name, file_name):
   username = getpass.getuser()
   try:
     if floder_name:
-      return open('/home/{}/.config/sublime-text-3/Packages/DefaultCode/{}/{}'.format(username, floder_name, file_name), 'r')
+      return open('{}/{}/{}'.format(BASE_PATH, floder_name, file_name), 'r')
     else:
-      return open('/home/{}/.config/sublime-text-3/Packages/DefaultCode/{}'.format(username, file_name), 'r')
+      return open('{}/{}'.format(BASE_PATH, file_name), 'r')
   except Exception as e:
     print(e)
     sublime.error_message('no such file {}/{}'.format(floder_name, file_name))
@@ -20,9 +22,9 @@ def read_file(floder_name, file_name):
 def prepare_files(floder_name=''):
   username = getpass.getuser()
   if floder_name:
-    path = '/home/{}/.config/sublime-text-3/Packages/DefaultCode/{}/'.format(username, floder_name)
+    path = '{}/{}/'.format(BASE_PATH, floder_name)
   else:
-    path = '/home/{}/.config/sublime-text-3/Packages/DefaultCode/'.format(username)
+    path = '{}/'.format(BASE_PATH)
   result = []
   for parent, dirnames, filenames in os.walk(path, followlinks=True):
     for filename in filenames:
