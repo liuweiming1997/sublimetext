@@ -19,7 +19,12 @@
     { "keys": ["ctrl+f"], "command": "show_panel", "args": {"panel": "find", "reverse": false} },
     { "keys": ["ctrl+s"], "command": "save", "args": { "async": true } },
     { "keys": ["ctrl+shift+l"], "command": "split_selection_into_lines" },
-
+    { "keys": ["ctrl+p"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true} },
+    { "keys": ["home"], "command": "move_to", "args": {"to": "bol", "extend": false}},
+    { "keys": ["end"], "command": "move_to", "args": {"to": "eol", "extend": false} },
+    { "keys": ["shift+home"], "command": "move_to", "args": {"to": "bol", "extend": true}},
+    { "keys": ["shift+end"], "command": "move_to", "args": {"to": "eol", "extend": true} },
+    { "keys": ["ctrl+r"], "command": "show_overlay", "args": {"overlay": "goto", "text": "@"} },
 
     //注释快捷键
     { "keys": ["ctrl+shift+c"], "command": "toggle_comment", "args": { "block": false } },
