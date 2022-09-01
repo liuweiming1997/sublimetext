@@ -14,6 +14,7 @@
     { "keys": ["ctrl+z"], "command": "undo" },
     { "keys": ["ctrl+shift+z"], "command": "redo" },
     { "keys": ["ctrl+y"], "command": "redo_or_repeat" },
+    { "keys": ["ctrl+g"], "command": "find_next" },
     { "keys": ["ctrl+u"], "command": "soft_undo" },
     { "keys": ["ctrl+shift+u"], "command": "soft_redo" },
     { "keys": ["ctrl+f"], "command": "show_panel", "args": {"panel": "find", "reverse": false} },
@@ -80,6 +81,8 @@
     { "keys": ["ctrl+8"], "command": "goto_reference" },
     /* sublime self */
 
+    { "keys": ["ctrl+e"], "command": "move", "args": {"by": "characters", "forward": true} },
+    // { "keys": ["ctrl+]"], "command": "move", "args": {"by": "characters", "forward": false} },
     { "keys": ["ctrl+k"], "command": "move", "args": {"by": "lines", "forward": false} },
     { "keys": ["ctrl+j"], "command": "move", "args": {"by": "lines", "forward": true} },
     // { "keys": ["ctrl+h"], "command": "move", "args": {"by": "characters", "forward": false} },
@@ -92,6 +95,9 @@
 
     { "keys": ["ctrl+alt+i"], "command": "copy_path" },
     { "keys": ["ctrl+alt+n"], "command": "side_bar_copy_name" },
+    // for mac
+    { "keys": ["ctrl+super+i"], "command": "copy_path" },
+    { "keys": ["ctrl+super+n"], "command": "side_bar_copy_name" },
 
     //隐藏侧边栏
     {"keys": ["f1"],"command": "toggle_side_bar"},
