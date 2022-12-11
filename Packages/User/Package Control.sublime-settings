@@ -2,6 +2,15 @@
 	"bootstrapped": true,
 	"in_process_packages":
 	[
+		"BracketHighlighter",
+		"Dockerfile Syntax Highlighting",
+		"Emmet",
+		"Git blame",
+		"GitGutter",
+		"MarkdownPreview",
+		"SideBarEnhancements",
+		"SyncedSideBar",
+		"WakaTime",
 	],
 	"installed_packages":
 	[
@@ -25,5 +34,5 @@
 		"SyncedSideBar",
 		"Terminal",
 		"WakaTime"
-	]
+	],
 }
