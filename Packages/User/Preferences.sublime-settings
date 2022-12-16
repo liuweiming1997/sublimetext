@@ -34,7 +34,7 @@
 		"SideBarEnhancements",
 		"SyncedSideBar",
 		"Vintage",
-		"WakaTime",
+		"WakaTime"
 	],
 	"index_files": true,
 	"open_files_in_new_window": true,
@@ -48,5 +48,5 @@
 	"theme": "Default.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"update_check": false,
-	"word_wrap": false,
+	"word_wrap": false
 }
